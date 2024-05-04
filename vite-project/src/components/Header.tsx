@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
-background : skyblue;
+background : #3182F6;
+color: black;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -25,13 +26,21 @@ box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
 }
 `
 
-const Header = () => {
+interface HeaderProps {
+  income: number;
+  expenditure: number;
+}
+
+const Header: React.FC<HeaderProps>= ({income, expenditure}) => {
+  const total = income - expenditure;
+  const formattedTotal = total.toLocaleString('ko-KR');
+
     return (
       <StyledHeader>
-        <h1>내 현재 자산은?</h1>
-        <p>50,000 원</p>
+        <h1>지금 내 자산은?</h1>
+        <p>{formattedTotal} 원</p>
       </StyledHeader>
-    );
+    ); 
   };
 
 export default Header;
