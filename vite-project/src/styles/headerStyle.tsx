@@ -12,7 +12,7 @@ box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
 
 & h1 {
   position: absolute;
-  top: 5%;
+  top: 3%;
   left: 25%;
 }
 
@@ -20,7 +20,7 @@ box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
   font-size: 3rem;
   font-weight: 500;
   position: absolute;
-  top: 10%;
+  top: 7%;
   left: 50%;
   transform: translateX(-50%);
 }
