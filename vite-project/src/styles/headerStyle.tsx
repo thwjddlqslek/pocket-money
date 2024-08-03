@@ -14,7 +14,7 @@ export const StyledHeader = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 100;
+  z-index: 100; /* Blur 영향 받음 */
   top: 0;
   left: 50%;
   transform: translateX(-50%);

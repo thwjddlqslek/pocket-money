@@ -43,6 +43,12 @@ export const PocketContainer = styled(CommonContainer)`
     justify-content: center;
     align-items: center;
   }
+`;
+
+export const BigDateSelector = styled.div`
+  & .select-container {
+    width: 16rem;
+  }
 
   & select {
     width: 7rem;
@@ -102,7 +108,7 @@ export const ReportContainer = styled.div`
   min-height: 55px;
   justify-content: center;
   display: flex;
-  position: relative;
+  //position: relative; ON설정 =>
 
   div {
     display: flex;
