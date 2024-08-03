@@ -1,54 +1,83 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
-  //background : pink;
-  display : flex;
-  justify-content: center;
-  align-items: center;
-  width: 95%;
-  //height: 100%;
-`
-export const PocketContainer = styled.div`
-  background : white;
-  //display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 17%;
-  left: 50%;
-  transform: translateX(-50%);
+export const CommonContainer = styled.div`
   width: 60vw;
-  height: 70vh;
-  //border : 2px solid #000;
-  border-radius : 1rem;
+  height: 72vh;
+  border: 1px solid #431ef5;
+  border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
 
-  & div{
-    //background : pink;
+export const MainContainer = styled.div`
+  //background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 150%;
+`;
+
+export const PocketContainer = styled(CommonContainer)`
+  margin-top: 6rem;
+
+  & > div {
+    //background: pink;
     display: flex;
+    flex-direction: row;
     width: 100%;
-    //justify-content: space-around;
+  }
+
+  & p {
+    margin: 1.5rem 0 1.2rem 1rem;
+  }
+
+  & .button-container {
+    display: flex;
+    //background-color: red;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
   }
 
   & select {
     width: 7rem;
-    //border: 1px solid #000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #431ef5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 1.2rem;
     font-weight: 600;
     padding: 0.5rem;
     margin: 1rem 0 1rem 1rem;
     border-radius: 1rem;
+    outline: none;
   }
-  
-  & p {
-    margin: 1.5rem 0 1.2rem 1rem;
+`;
+
+export const AddButton = styled.button<{ bgColor: string }>`
+  width: 4rem;
+  height: 3rem;
+  margin-right: 1rem;
+  background-color: ${(props) => props.bgColor};
+  border: none;
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+
+  &:active {
+    border-color: #301db0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98);
   }
-`
-export const ColorText = styled.div<{color: string}>`
+`;
+export const ColorText = styled.div<{ color: string }>`
   color: ${(props) => props.color};
-`
+`;
 
 export const TotalContainer = styled.div`
   //background: pink;
@@ -56,7 +85,8 @@ export const TotalContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  & div {
+  & > div {
+    display: flex;
     width: 50%;
     //background: skyblue;
     //height: 1.5rem;
@@ -64,20 +94,22 @@ export const TotalContainer = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 export const ReportContainer = styled.div`
   //background: green;
   width: 80%;
-  height: 70%;
+  height: 30rem;
+  min-height: 55px;
   justify-content: center;
   display: flex;
-  
+  position: relative;
+
   div {
     display: flex;
-    width: 50%;
+    width: 46%;
     //background: pink;
-    height: 95%;
-    border : 1px solid #000;
+    min-height: 40px;
+    border: 1px solid #431ef5;
     border-radius: 1rem;
     align-items: center;
     justify-content: flex-start;
@@ -85,58 +117,27 @@ export const ReportContainer = styled.div`
     flex-direction: column;
     overflow-y: auto;
   }
-`
+`;
 export const OneReport = styled.h1`
   //background : green;
   width: 95%;
-  min-height: 5rem;
+  min-height: 4rem;
   margin: 0.5rem;
   border-radius: 1rem;
   box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: column;
-  align-items: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
   h1 {
     font-size: 1rem;
   }
-`
-
-export const ChartContainer = styled.div`
-  background : white;
-  display: flex;
-  //justify-content: center;
-  //align-items: center;
-  position: absolute;
-  top: 92%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60vw;
-  height: 75vh;
-  //border : 2px solid #000;
-  border-radius : 1rem;
-  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
-
-  & div{
-    //background : pink;
-    display: flex;
-    width: 100%;
-    //justify-content: space-around;
+  p {
+    font-size: 1.3rem;
+    //background-color: red;
   }
+`;
 
-  & select {
-    width: 7rem;
-    //border: 1px solid #000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 0.5rem;
-    margin: 1rem 0 1rem 1rem;
-    border-radius: 1rem;
-  }
-  
-  & p {
-    margin: 1.5rem 0 1.2rem 1rem;
-  }
-`
+// 상속 받는거 구현
+export const ChartContainer = styled(CommonContainer)``;

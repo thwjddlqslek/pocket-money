@@ -1,5 +1,10 @@
 import React from "react";
 import * as m from "../styles/mainStyle";
+import styled from "styled-components";
+
+const SpendColor = styled.p`
+    color: #EB0130;
+`
 
 interface SpendReportProps {
     date: Date;
@@ -17,7 +22,7 @@ const SpendReport: React.FC<SpendReportProps> = ({date, text, number}) => {
     return(
         <m.OneReport>
         <h1>{formateDate}</h1>
-        <p>{text} : {number}</p>
+        <p>{text}</p><SpendColor>{number}</SpendColor>
         </m.OneReport>
     );
 };
