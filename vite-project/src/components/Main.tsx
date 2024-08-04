@@ -8,6 +8,7 @@ import { useState } from "react";
 import Header from "./Header";
 
 interface Report {
+  date: string;
   content: string;
   amount: number;
 }
@@ -15,18 +16,18 @@ interface Report {
 const Main: React.FC = () => {
   // 수기로 입력한 값.
   const [incomeReports, setIncomeReports] = useState<Report[]>([
-    { content: "정기 용돈", amount: 500000 },
-    { content: "알바", amount: 428100 },
-    { content: "할아버지 용돈", amount: 100000 },
+    { date: "2024-08-01", content: "정기 용돈", amount: 500000 },
+    { date: "2024-08-01", content: "알바", amount: 428100 },
+    { date: "2024-08-01", content: "할아버지 용돈", amount: 100000 },
   ]);
   const [spendReports, setSpendReports] = useState<Report[]>([
-    { content: "까까사먹음", amount: 3500 },
-    { content: "커피", amount: 2000 },
-    { content: "강의 교재", amount: 55000 },
-    { content: "동창 모임", amount: 47500 },
-    { content: "친구 생선", amount: 32000 },
-    { content: "어버이날", amount: 30000 },
-    { content: "하이디라오", amount: 87000 },
+    { date: "2024-08-01", content: "까까사먹음", amount: 3500 },
+    { date: "2024-08-01", content: "커피", amount: 2000 },
+    { date: "2024-08-01", content: "강의 교재", amount: 55000 },
+    { date: "2024-08-01", content: "동창 모임", amount: 47500 },
+    { date: "2024-08-01", content: "친구 생선", amount: 32000 },
+    { date: "2024-08-01", content: "어버이날", amount: 30000 },
+    { date: "2024-08-01", content: "하이디라오", amount: 87000 },
   ]);
   const totalIncome = incomeReports.reduce((acc, curr) => acc + curr.amount, 0);
   const totalSpend = spendReports.reduce((acc, curr) => acc + curr.amount, 0);
@@ -80,6 +81,7 @@ const Main: React.FC = () => {
               {incomeReports.map((report, index) => (
                 <IncomeReport
                   key={index}
+                  date={report.date}
                   content={report.content}
                   amount={report.amount}
                 />

@@ -7,11 +7,16 @@ const IncomeColor = styled.p`
 `;
 
 interface IncomeReportProps {
+  date: string;
   content: string;
   amount: number;
 }
 
-const IncomeReport: React.FC<IncomeReportProps> = ({ content, amount }) => {
+const IncomeReport: React.FC<IncomeReportProps> = ({
+  date,
+  content,
+  amount,
+}) => {
   /*   const formateDate = date.toLocaleDateString("ko-KR", {
     year: "2-digit",
     month: "2-digit",
@@ -20,6 +25,7 @@ const IncomeReport: React.FC<IncomeReportProps> = ({ content, amount }) => {
  */
   return (
     <m.OneReport>
+      <p>{date}</p>
       <p>{content}</p>
       <IncomeColor>{amount}</IncomeColor>
     </m.OneReport>

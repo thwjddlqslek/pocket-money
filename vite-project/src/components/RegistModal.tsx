@@ -5,23 +5,29 @@ import { SmallDateSelector } from "./SmallDateSelector";
 interface ModalProps {
   show: boolean;
   onClose: () => void;
-  onAddIncome: (report: { content: string; amount: number }) => void;
+  onAddIncome: (report: {
+    date: string;
+    content: string;
+    amount: number;
+  }) => void;
 }
 
 const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
-  //const [incomeDate, setIncomeDate] = useState("");
+  const [incomeDate, setIncomeDate] = useState("");
   const [incomeContent, setIncomeContent] = useState("");
   const [incomeAmount, setIncomeAmount] = useState<number | "">("");
   if (!show) return null;
 
   const handleSubmit = () => {
-    if (incomeContent && incomeAmount) {
+    if (incomeDate && incomeContent && incomeAmount) {
       onAddIncome({
+        date: incomeDate,
         content: incomeContent,
         amount: incomeAmount,
       });
       setIncomeContent("");
       setIncomeAmount("");
+      setIncomeDate("");
     }
   };
   return (
@@ -33,7 +39,7 @@ const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
           <div className="form-grid">
             <label>날짜</label>
             <p>
-              <SmallDateSelector />
+              <SmallDateSelector selectedDate={setIncomeDate} />
             </p>
           </div>
           <div className="form-grid">

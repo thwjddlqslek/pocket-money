@@ -102,18 +102,15 @@ export const TotalContainer = styled.div`
   }
 `;
 export const ReportContainer = styled.div`
-  //background: green;
   width: 80%;
   height: 30rem;
   min-height: 55px;
   justify-content: center;
   display: flex;
-  //position: relative; ON설정 =>
-
+  //position: relative;
   div {
     display: flex;
     width: 46%;
-    //background: pink;
     min-height: 40px;
     border: 1px solid #431ef5;
     border-radius: 1rem;
@@ -140,7 +137,7 @@ export const OneReport = styled.h1`
     font-size: 1rem;
   }
   p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     //background-color: red;
   }
 `;
