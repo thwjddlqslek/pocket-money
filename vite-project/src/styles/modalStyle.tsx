@@ -61,7 +61,7 @@ export const ModalContent = styled.div`
     justify-content: center;
     margin: 1.5rem 0 0;
   }
-  & .form-grid p {
+  & .form-grid h2 {
     width: 20rem;
     font-size: 1.5rem;
     display: flex;

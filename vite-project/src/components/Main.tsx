@@ -1,33 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as m from "../styles/mainStyle";
 import RegistModal from "./RegistModal";
 import { BigDateSelector } from "./BigDateSelector";
 import IncomeReport from "../components/IncomeReport";
 import SpendReport from "../components/SpendReport";
-import { useState } from "react";
 import Header from "./Header";
+import { RootState, AppDispatch } from "../store";
+import { fetchIncomeReports, addIncomeReport } from "../store/incomeSlice";
 
 interface Report {
+  id?: number;
   date: string;
   content: string;
   amount: number;
 }
 
 const Main: React.FC = () => {
+  // useSelector : Redux 스토어의 상태를 읽는 Hook
+  const incomeReports = useSelector((state: RootState) => state.income);
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("fetchIncomeReports 수행 완료");
+    dispatch(fetchIncomeReports());
+  }, [dispatch]);
   // 수기로 입력한 값.
-  const [incomeReports, setIncomeReports] = useState<Report[]>([
-    { date: "2024-08-01", content: "정기 용돈", amount: 500000 },
-    { date: "2024-08-01", content: "알바", amount: 428100 },
-    { date: "2024-08-01", content: "할아버지 용돈", amount: 100000 },
-  ]);
-  const [spendReports, setSpendReports] = useState<Report[]>([
+
+  const [spendReports, setSpendReports] = useState([
     { date: "2024-08-01", content: "까까사먹음", amount: 3500 },
     { date: "2024-08-01", content: "커피", amount: 2000 },
     { date: "2024-08-01", content: "강의 교재", amount: 55000 },
     { date: "2024-08-01", content: "동창 모임", amount: 47500 },
-    { date: "2024-08-01", content: "친구 생선", amount: 32000 },
-    { date: "2024-08-01", content: "어버이날", amount: 30000 },
-    { date: "2024-08-01", content: "하이디라오", amount: 87000 },
   ]);
   const totalIncome = incomeReports.reduce((acc, curr) => acc + curr.amount, 0);
   const totalSpend = spendReports.reduce((acc, curr) => acc + curr.amount, 0);
@@ -38,10 +42,17 @@ const Main: React.FC = () => {
   const clickCloseModal = () => {
     setShowModal(false);
   };
-  const handleAddIncome = (report: Report) => {
-    setIncomeReports([...incomeReports, report]);
-    setShowModal(false);
+  const handleAddIncome = async (report: Report) => {
+    try {
+      // unwrap() : redux-toolkit createAsyncThunk에서 반환된 Promise의 결과 처리할 때 사용하는 메소드
+      await dispatch(addIncomeReport(report)).unwrap();
+      setShowModal(false);
+      console.log("[성공] 수입 내역 1건 추가 완료", report);
+    } catch (err) {
+      console.error("[실패] 수입 내역 1건 추가 불가", err);
+    }
   };
+
   return (
     <>
       <Header totalIncome={totalIncome} totalSpend={totalSpend} />
@@ -51,10 +62,10 @@ const Main: React.FC = () => {
             <BigDateSelector />
             <p>의 수입과 지출 내역</p>
             <div className="button-container">
-              <m.AddButton bgColor="#431EF5" onClick={clickShowModal}>
+              <m.AddButton bgcolor="#431EF5" onClick={clickShowModal}>
                 수입+
               </m.AddButton>
-              <m.AddButton bgColor="#EB0130">지출+</m.AddButton>
+              <m.AddButton bgcolor="#EB0130">지출+</m.AddButton>
               <RegistModal
                 show={showModal}
                 onClose={clickCloseModal}
@@ -78,9 +89,9 @@ const Main: React.FC = () => {
           </m.TotalContainer>
           <m.ReportContainer>
             <div>
-              {incomeReports.map((report, index) => (
+              {incomeReports.map((report) => (
                 <IncomeReport
-                  key={index}
+                  key={report.id}
                   date={report.date}
                   content={report.content}
                   amount={report.amount}

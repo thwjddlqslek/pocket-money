@@ -15,18 +15,19 @@ interface ModalProps {
 const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
   const [incomeDate, setIncomeDate] = useState("");
   const [incomeContent, setIncomeContent] = useState("");
-  const [incomeAmount, setIncomeAmount] = useState<number | "">("");
+  const [incomeAmount, setIncomeAmount] = useState<number | null>(null);
+
   if (!show) return null;
 
   const handleSubmit = () => {
-    if (incomeDate && incomeContent && incomeAmount) {
+    if (incomeDate && incomeContent && incomeAmount !== null) {
       onAddIncome({
         date: incomeDate,
         content: incomeContent,
         amount: incomeAmount,
       });
       setIncomeContent("");
-      setIncomeAmount("");
+      setIncomeAmount(null);
       setIncomeDate("");
     }
   };
@@ -38,30 +39,30 @@ const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
           <h1>수입 내역 작성하기</h1>
           <div className="form-grid">
             <label>날짜</label>
-            <p>
+            <h2>
               <SmallDateSelector selectedDate={setIncomeDate} />
-            </p>
+            </h2>
           </div>
           <div className="form-grid">
             <label>내용</label>
-            <p>
+            <h2>
               <input
                 value={incomeContent}
                 onChange={(e) => setIncomeContent(e.target.value)}
                 placeholder="수입 내용을 작성해주세요!"
               />
-            </p>
+            </h2>
           </div>
           <div className="form-grid">
             <label>금액</label>
-            <p>
+            <h2>
               <input
-                value={incomeAmount}
+                value={incomeAmount ?? ""}
                 onChange={(e) => setIncomeAmount(Number(e.target.value))}
                 placeholder="수입 금액을 입력해주세요!"
                 type="number"
               />
-            </p>
+            </h2>
           </div>
         </div>
         <m.RegistButton onClick={handleSubmit}>등록하기</m.RegistButton>

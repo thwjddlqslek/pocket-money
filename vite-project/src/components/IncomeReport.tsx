@@ -17,12 +17,6 @@ const IncomeReport: React.FC<IncomeReportProps> = ({
   content,
   amount,
 }) => {
-  /*   const formateDate = date.toLocaleDateString("ko-KR", {
-    year: "2-digit",
-    month: "2-digit",
-    day: "2-digit",
-  });
- */
   return (
     <m.OneReport>
       <p>{date}</p>

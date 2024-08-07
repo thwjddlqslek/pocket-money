@@ -64,11 +64,11 @@ export const BigDateSelector = styled.div`
   }
 `;
 
-export const AddButton = styled.button<{ bgColor: string }>`
+export const AddButton = styled.button<{ bgcolor: string }>`
   width: 4rem;
   height: 3rem;
   margin-right: 1rem;
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.bgcolor};
   border: none;
   border-radius: 1rem;
   color: white;
