@@ -25,8 +25,31 @@ const Main: React.FC = () => {
     console.log("fetchIncomeReports 수행 완료");
     dispatch(fetchIncomeReports());
   }, [dispatch]);
-  // 수기로 입력한 값.
 
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    new Date().getMonth() + 1
+  );
+
+  const handleYearChange = (year: number) => {
+    setSelectedYear(year);
+  };
+
+  const handleMonthChange = (month: number) => {
+    setSelectedMonth(month);
+  };
+
+  const filteredIncomeReports = incomeReports.filter((report) => {
+    const reportDate = new Date(report.date);
+    return (
+      reportDate.getFullYear() === selectedYear &&
+      reportDate.getMonth() + 1 === selectedMonth
+    );
+  });
+
+  // 수기로 입력한 값.
   const [spendReports, setSpendReports] = useState([
     { date: "2024-08-01", content: "까까사먹음", amount: 3500 },
     { date: "2024-08-01", content: "커피", amount: 2000 },
@@ -59,7 +82,10 @@ const Main: React.FC = () => {
       <m.MainContainer>
         <m.PocketContainer>
           <div>
-            <BigDateSelector />
+            <BigDateSelector
+              onYearChange={handleYearChange}
+              onMonthChange={handleMonthChange}
+            />
             <p>의 수입과 지출 내역</p>
             <div className="button-container">
               <m.AddButton bgcolor="#431EF5" onClick={clickShowModal}>
@@ -89,7 +115,7 @@ const Main: React.FC = () => {
           </m.TotalContainer>
           <m.ReportContainer>
             <div>
-              {incomeReports.map((report) => (
+              {filteredIncomeReports.map((report) => (
                 <IncomeReport
                   key={report.id}
                   date={report.date}
