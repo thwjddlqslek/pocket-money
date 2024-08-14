@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CommonContainer = styled.div`
-  width: 60vw;
+  width: 70vw;
   height: 72vh;
   border: 1px solid #431ef5;
   border-radius: 1rem;
@@ -53,7 +53,7 @@ export const BigDateSelector = styled.div`
   & select {
     width: 7rem;
     border: 1px solid #431ef5;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 1.2rem;
     font-weight: 600;
@@ -119,28 +119,63 @@ export const ReportContainer = styled.div`
     margin: 1rem;
     flex-direction: column;
     overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: rgba(224, 229, 253, 0.7);
+    }
+    &::-webkit-scrollbar-thumb:active {
+      border-radius: 2px;
+      background: rgba(67, 30, 245, 0.5);
+    }
   }
 `;
 export const OneReport = styled.h1`
-  //background : green;
   width: 95%;
-  min-height: 4rem;
+  height: 5rem;
   margin: 0.5rem;
   border-radius: 1rem;
-  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
-  h1 {
-    font-size: 1rem;
-  }
   p {
     font-size: 1.2rem;
-    //background-color: red;
+  }
+
+  #date {
+    min-width: 6.5rem;
+    text-align: left;
+  }
+
+  #content {
+    width: 12rem;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  #amount {
+    color: #431ef5;
+    text-align: right;
+    min-width: 6rem;
+    padding-right: 1rem;
   }
 `;
 
 // 상속 받는거 구현
 export const ChartContainer = styled(CommonContainer)``;
+
+// 스크롤 바
+export const StyledScrollBar = styled.div`
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
+`;

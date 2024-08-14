@@ -31,6 +31,16 @@ const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
       setIncomeDate("");
     }
   };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const amountInputValue = e.target.value;
+
+    if (/^\d*$/.test(amountInputValue) && amountInputValue.length <= 9) {
+      setIncomeAmount(
+        amountInputValue === "" ? null : Number(amountInputValue)
+      );
+    }
+  };
   return (
     <m.ModalContainer>
       <m.ModalContent>
@@ -48,8 +58,9 @@ const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
             <h2>
               <input
                 value={incomeContent}
+                maxLength={30}
                 onChange={(e) => setIncomeContent(e.target.value)}
-                placeholder="수입 내용을 작성해주세요!"
+                placeholder="30자 이하로 작성해주세요!"
               />
             </h2>
           </div>
@@ -58,7 +69,8 @@ const RegistModal: React.FC<ModalProps> = ({ show, onClose, onAddIncome }) => {
             <h2>
               <input
                 value={incomeAmount ?? ""}
-                onChange={(e) => setIncomeAmount(Number(e.target.value))}
+                maxLength={9}
+                onChange={handleAmountChange}
                 placeholder="수입 금액을 입력해주세요!"
                 type="number"
               />

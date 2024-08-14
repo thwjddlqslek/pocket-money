@@ -3,11 +3,13 @@ import * as m from "../styles/mainStyle";
 interface BigDateSelectorProps {
   onYearChange: (year: number) => void;
   onMonthChange: (month: number) => void;
+  selectedMonth: number;
 }
 
 export const BigDateSelector: React.FC<BigDateSelectorProps> = ({
   onYearChange,
   onMonthChange,
+  selectedMonth,
 }) => {
   const currentYear: number = new Date().getFullYear();
   const years: number[] = Array.from(
@@ -26,7 +28,10 @@ export const BigDateSelector: React.FC<BigDateSelectorProps> = ({
               </option>
             ))}
           </select>
-          <select onChange={(e) => onMonthChange(parseInt(e.target.value))}>
+          <select
+            value={selectedMonth}
+            onChange={(e) => onMonthChange(parseInt(e.target.value))}
+          >
             {months.map((month: number) => (
               <option key={month} value={month}>
                 {month} 월

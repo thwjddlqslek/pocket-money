@@ -49,6 +49,14 @@ const Main: React.FC = () => {
     );
   });
 
+  const sortedIncomeReports = filteredIncomeReports.sort((a, b) => {
+    if (a.date === b.date) {
+      return a.amount - b.amount;
+    } else {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+  });
+
   // 수기로 입력한 값.
   const [spendReports, setSpendReports] = useState([
     { date: "2024-08-01", content: "까까사먹음", amount: 3500 },
@@ -85,6 +93,7 @@ const Main: React.FC = () => {
             <BigDateSelector
               onYearChange={handleYearChange}
               onMonthChange={handleMonthChange}
+              selectedMonth={selectedMonth}
             />
             <p>의 수입과 지출 내역</p>
             <div className="button-container">
@@ -115,7 +124,7 @@ const Main: React.FC = () => {
           </m.TotalContainer>
           <m.ReportContainer>
             <div>
-              {filteredIncomeReports.map((report) => (
+              {sortedIncomeReports.map((report) => (
                 <IncomeReport
                   key={report.id}
                   date={report.date}

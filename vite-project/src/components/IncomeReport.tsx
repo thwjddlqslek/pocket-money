@@ -1,10 +1,5 @@
 import React from "react";
 import * as m from "../styles/mainStyle";
-import styled from "styled-components";
-
-const IncomeColor = styled.p`
-  color: #431ef5;
-`;
 
 interface IncomeReportProps {
   date: string;
@@ -17,11 +12,12 @@ const IncomeReport: React.FC<IncomeReportProps> = ({
   content,
   amount,
 }) => {
+  const formateAmout = amount.toLocaleString();
   return (
     <m.OneReport>
-      <p>{date}</p>
-      <p>{content}</p>
-      <IncomeColor>{amount}</IncomeColor>
+      <p id="date">{date}</p>
+      <p id="content">{content}</p>
+      <p id="amount">{formateAmout}</p>
     </m.OneReport>
   );
 };
