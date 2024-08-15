@@ -8,6 +8,7 @@ interface Report {
   amount: number;
 }
 
+// 수입 내역 불러오기
 export const fetchIncomeReports = createAsyncThunk<Report[]>(
   "income/fetchIncomeReports",
   async () => {
@@ -19,6 +20,7 @@ export const fetchIncomeReports = createAsyncThunk<Report[]>(
   }
 );
 
+// 수입 내역 추가하기
 export const addIncomeReport = createAsyncThunk<Report, Report>(
   "income/addIncomeReport",
   async (report: Report) => {
@@ -52,6 +54,45 @@ export const addIncomeReport = createAsyncThunk<Report, Report>(
   }
 );
 
+// 수입 내역 업데이트
+export const updateIncomeReport = createAsyncThunk<Report, Report>(
+  "income/updateIncomeReport",
+  async (report: Report) => {
+    console.log("Update Report:", report);
+    const { data, error } = await supabase
+      .from("income_reports")
+      .update({
+        content: report.content,
+        amount: report.amount,
+      })
+      .eq("id", report.id) // Update where `id` matches `report.id`
+      .select(); // Fetch the updated row
+    console.log(report.id);
+    if (error) {
+      throw new Error(error.message);
+    }
+    const insertedData = data[0]; // data 배열 형태
+
+    // Assuming data is an array and we're interested in the updated record
+    return insertedData as Report;
+  }
+);
+
+// 수입 내역 삭제하기
+export const deleteIncomeReport = createAsyncThunk(
+  "income/deleteIncomeReport",
+  async (id: number) => {
+    const { error } = await supabase
+      .from("income_reports")
+      .delete()
+      .eq("id", id);
+    if (error) {
+      throw new Error(error.message);
+    }
+    return id; // 성공적으로 삭제된 항목의 ID를 반환
+  }
+);
+
 const incomeSlice = createSlice({
   name: "income", //slice 이름 정의, Redux 상태의 키
   initialState: [] as Report[],
@@ -80,6 +121,18 @@ const incomeSlice = createSlice({
         console.log("State after adding report:", state);
       }
     );
+    builder.addCase(deleteIncomeReport.fulfilled, (state, action) => {
+      return state.filter((report) => report.id !== action.payload);
+    });
+
+    builder.addCase(updateIncomeReport.fulfilled, (state, action) => {
+      const index = state.findIndex(
+        (report) => report.id === action.payload.id
+      );
+      if (index !== -1) {
+        state[index] = action.payload;
+      }
+    });
   },
 });
 

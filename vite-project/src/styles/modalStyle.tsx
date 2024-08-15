@@ -12,6 +12,7 @@ export const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(3px);
+  z-index: 999;
 `;
 export const ModalContent = styled.div`
   position: relative;
@@ -25,6 +26,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1000;
 
   & button {
     position: absolute;

@@ -7,10 +7,14 @@ import IncomeReport from "../components/IncomeReport";
 import SpendReport from "../components/SpendReport";
 import Header from "./Header";
 import { RootState, AppDispatch } from "../store";
-import { fetchIncomeReports, addIncomeReport } from "../store/incomeSlice";
+import {
+  fetchIncomeReports,
+  addIncomeReport,
+  deleteIncomeReport,
+} from "../store/incomeSlice";
 
 interface Report {
-  id?: number;
+  id: number;
   date: string;
   content: string;
   amount: number;
@@ -83,6 +87,14 @@ const Main: React.FC = () => {
       console.error("[실패] 수입 내역 1건 추가 불가", err);
     }
   };
+  const handleDeleteIncome = async (id: number) => {
+    try {
+      await dispatch(deleteIncomeReport(id)).unwrap();
+      console.log("[성공] 수입 내역 1건 삭제 완료", id);
+    } catch (err) {
+      console.error("[실패] 수입 내역 1건 삭제 불가", err);
+    }
+  };
 
   return (
     <>
@@ -126,10 +138,12 @@ const Main: React.FC = () => {
             <div>
               {sortedIncomeReports.map((report) => (
                 <IncomeReport
-                  key={report.id}
+                  key={report.id!}
+                  id={report.id!}
                   date={report.date}
                   content={report.content}
                   amount={report.amount}
+                  onDelete={() => handleDeleteIncome(report.id!)}
                 />
               ))}
             </div>

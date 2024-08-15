@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CommonContainer = styled.div`
   width: 70vw;
-  height: 72vh;
+  height: 74vh;
   border: 1px solid #431ef5;
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
@@ -102,25 +102,28 @@ export const TotalContainer = styled.div`
   }
 `;
 export const ReportContainer = styled.div`
+  //background: pink;
   width: 80%;
-  height: 30rem;
+  height: 28rem;
   min-height: 55px;
   justify-content: center;
   display: flex;
   //position: relative;
-  div {
+  > div {
     display: flex;
-    width: 46%;
-    min-height: 40px;
+    width: 47%;
+    min-height: 35px;
     border: 1px solid #431ef5;
     border-radius: 1rem;
     align-items: center;
-    justify-content: flex-start;
-    margin: 1rem;
+    //justify-content: flex-start;
+    margin: 0.5rem;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: auto;
     &::-webkit-scrollbar {
       width: 7px;
+      height: 7px;
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 2px;
@@ -139,29 +142,94 @@ export const OneReport = styled.h1`
   border-radius: 1rem;
   box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  .icon-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6rem;
+    height: 1rem;
+  }
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  input {
+    margin-top: 0.5rem;
+    height: 2rem;
+    outline: none;
+    background: rgba(224, 229, 253, 0.7);
+    //border: 1px solid #431ef5;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+  #input-content {
+    width: 60%;
+    text-align: center;
+  }
+  #input-amount {
+    width: 20%;
+    text-align: right;
+    padding-right: 0.5rem;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
   p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  button {
+    width: 3rem;
+    height: 1.2rem;
+    font-size: 0.8rem;
+    border-radius: 1rem;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.7rem;
   }
 
   #date {
-    min-width: 6.5rem;
+    width: 22%;
     text-align: left;
   }
 
   #content {
-    width: 12rem;
+    width: 53%;
     word-wrap: break-word;
     text-align: center;
   }
   #amount {
     color: #431ef5;
     text-align: right;
-    min-width: 6rem;
-    padding-right: 1rem;
+    width: 25%;
+    word-wrap: break-word;
+    margin-right: 1rem;
+  }
+
+  #update {
+    color: #00874f;
+    background-color: rgba(0, 135, 79, 0.2);
+  }
+
+  #save {
+    color: #431ef5;
+    background-color: rgba(67, 30, 245, 0.15);
+  }
+
+  #delete {
+    color: #eb0130;
+    background-color: rgba(235, 48, 1, 0.15);
   }
 `;
 

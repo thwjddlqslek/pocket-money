@@ -23,7 +23,6 @@ export const StyledHeader = styled.div`
   min-height: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-
   //border : 2px solid #000;
   border-radius: 2rem;
   color: #431ef5;
@@ -31,17 +30,20 @@ export const StyledHeader = styled.div`
   transition: background-color 0.1s ease, color 0.1s ease, background 0.1s ease;
 
   & h1 {
-    //font-size: 1rem;
-    position: fixed;
-    top: 20px;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 15px;
     left: 25%;
     transform: translateX(-50%);
   }
 
-  & p {
-    font-size: 3rem;
+  p {
+    width: 25rem;
+    text-align: center;
+    //background-color: pink;
+    font-size: 2.7rem;
     font-weight: 500;
-    position: fixed;
+    position: absolute;
     top: 25px;
     left: 50%;
     transform: translateX(-50%);
