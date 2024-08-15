@@ -64,17 +64,18 @@ export const BigDateSelector = styled.div`
   }
 `;
 
-export const AddButton = styled.button<{ bgcolor: string }>`
+export const AddButton = styled.button<{ $bgColor: string }>`
   width: 4rem;
   height: 3rem;
   margin-right: 1rem;
-  background-color: ${(props) => props.bgcolor};
+  background-color: ${(props) => props.$bgColor};
   border: none;
   border-radius: 1rem;
   color: white;
   cursor: pointer;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.9rem;
   &:active {
     border-color: #301db0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -184,7 +185,7 @@ export const OneReport = styled.h1`
     }
   }
   p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   button {

@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 
 interface SmallDateSelectorProps {
   selectedDate: (date: string) => void;
+  modalColor: string;
 }
 
 export const SmallDateSelector: React.FC<SmallDateSelectorProps> = ({
   selectedDate,
+  modalColor,
 }) => {
   const currentYear: number = new Date().getFullYear();
   const currentMonth: number = new Date().getMonth() + 1;
@@ -39,7 +41,7 @@ export const SmallDateSelector: React.FC<SmallDateSelectorProps> = ({
 
   return (
     <>
-      <m.SmallDateSelector>
+      <m.SmallDateSelector $modalColor={modalColor}>
         <div className="select-container">
           <select
             id="year-select"

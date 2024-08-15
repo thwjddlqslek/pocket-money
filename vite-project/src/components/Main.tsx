@@ -13,8 +13,14 @@ import {
   deleteIncomeReport,
 } from "../store/incomeSlice";
 
+import {
+  fetchSpendReports,
+  addSpendReport,
+  deleteSpendReport,
+} from "../store/spendSlice";
+
 interface Report {
-  id: number;
+  id?: number;
   date: string;
   content: string;
   amount: number;
@@ -23,11 +29,13 @@ interface Report {
 const Main: React.FC = () => {
   // useSelector : Redux 스토어의 상태를 읽는 Hook
   const incomeReports = useSelector((state: RootState) => state.income);
+  const spendReports = useSelector((state: RootState) => state.spend);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    console.log("fetchIncomeReports 수행 완료");
+    console.log("fetchIncomeReports, fetchSpendReports 수행 완료");
     dispatch(fetchIncomeReports());
+    dispatch(fetchSpendReports());
   }, [dispatch]);
 
   const [selectedYear, setSelectedYear] = useState<number>(
@@ -45,38 +53,29 @@ const Main: React.FC = () => {
     setSelectedMonth(month);
   };
 
-  const filteredIncomeReports = incomeReports.filter((report) => {
-    const reportDate = new Date(report.date);
-    return (
-      reportDate.getFullYear() === selectedYear &&
-      reportDate.getMonth() + 1 === selectedMonth
-    );
-  });
-
-  const sortedIncomeReports = filteredIncomeReports.sort((a, b) => {
-    if (a.date === b.date) {
-      return a.amount - b.amount;
-    } else {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    }
-  });
-
-  // 수기로 입력한 값.
-  const [spendReports, setSpendReports] = useState([
-    { date: "2024-08-01", content: "까까사먹음", amount: 3500 },
-    { date: "2024-08-01", content: "커피", amount: 2000 },
-    { date: "2024-08-01", content: "강의 교재", amount: 55000 },
-    { date: "2024-08-01", content: "동창 모임", amount: 47500 },
-  ]);
   const totalIncome = incomeReports.reduce((acc, curr) => acc + curr.amount, 0);
   const totalSpend = spendReports.reduce((acc, curr) => acc + curr.amount, 0);
   const [showModal, setShowModal] = useState(false);
-  const clickShowModal = () => {
+  const [modalColor, setModalColor] = useState("#EB0130"); // 지출 기준
+  const [modalTitle, setModalTitle] = useState("지출"); // 지출 기준
+  const [isSpendBttClicked, setIsSpendBttClicked] = useState(false); // 지출 기준
+
+  /* Modal 함수 ===================================================================================================*/
+  const clickShowModal = (
+    color: string,
+    title: string,
+    spendClicked: boolean
+  ) => {
+    setModalColor(color);
+    setModalTitle(title);
+    setIsSpendBttClicked(spendClicked);
     setShowModal(true);
   };
   const clickCloseModal = () => {
     setShowModal(false);
   };
+
+  /* 수입 내역 함수 ===================================================================================================*/
   const handleAddIncome = async (report: Report) => {
     try {
       // unwrap() : redux-toolkit createAsyncThunk에서 반환된 Promise의 결과 처리할 때 사용하는 메소드
@@ -96,6 +95,62 @@ const Main: React.FC = () => {
     }
   };
 
+  const filteredIncomeReports = incomeReports.filter((report) => {
+    const reportDate = new Date(report.date);
+    return (
+      reportDate.getFullYear() === selectedYear &&
+      reportDate.getMonth() + 1 === selectedMonth
+    );
+  });
+
+  const sortedIncomeReports = filteredIncomeReports.sort((a, b) => {
+    if (a.date === b.date) {
+      return a.amount - b.amount;
+    } else {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+  });
+
+  /* ===================================================================================================================== */
+
+  /* 지출 내역 함수 ===================================================================================================*/
+  const handleAddSpend = async (report: Report) => {
+    try {
+      // unwrap() : redux-toolkit createAsyncThunk에서 반환된 Promise의 결과 처리할 때 사용하는 메소드
+      await dispatch(addSpendReport(report)).unwrap();
+      setShowModal(false);
+      console.log("[성공] 지출 내역 1건 추가 완료", report);
+    } catch (err) {
+      console.error("[실패] 지출 내역 1건 추가 불가", err);
+    }
+  };
+  const handleDeleteSpend = async (id: number) => {
+    try {
+      await dispatch(deleteSpendReport(id)).unwrap();
+      console.log("[성공] 지출 내역 1건 삭제 완료", id);
+    } catch (err) {
+      console.error("[실패] 지출 내역 1건 삭제 불가", err);
+    }
+  };
+
+  const filteredSpendReports = spendReports.filter((report) => {
+    const reportDate = new Date(report.date);
+    return (
+      reportDate.getFullYear() === selectedYear &&
+      reportDate.getMonth() + 1 === selectedMonth
+    );
+  });
+
+  const sortedSpendReports = filteredSpendReports.sort((a, b) => {
+    if (a.date === b.date) {
+      return a.amount - b.amount;
+    } else {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+  });
+
+  /* ===================================================================================================================== */
+
   return (
     <>
       <Header totalIncome={totalIncome} totalSpend={totalSpend} />
@@ -109,14 +164,26 @@ const Main: React.FC = () => {
             />
             <p>의 수입과 지출 내역</p>
             <div className="button-container">
-              <m.AddButton bgcolor="#431EF5" onClick={clickShowModal}>
+              <m.AddButton
+                $bgColor="#431EF5"
+                onClick={() => clickShowModal("#431ef5", "수입", false)}
+              >
                 수입+
               </m.AddButton>
-              <m.AddButton bgcolor="#EB0130">지출+</m.AddButton>
+              <m.AddButton
+                $bgColor="#EB0130"
+                onClick={() => clickShowModal("#EB0130", "지출", true)}
+              >
+                지출+
+              </m.AddButton>
               <RegistModal
                 show={showModal}
                 onClose={clickCloseModal}
+                isSpendBttClicked={isSpendBttClicked}
                 onAddIncome={handleAddIncome}
+                onAddSpend={handleAddSpend}
+                modalColor={modalColor}
+                modalTitle={modalTitle}
               />
             </div>
           </div>
@@ -148,11 +215,14 @@ const Main: React.FC = () => {
               ))}
             </div>
             <div>
-              {spendReports.map((report, index) => (
+              {sortedSpendReports.map((report) => (
                 <SpendReport
-                  key={index}
+                  key={report.id!}
+                  id={report.id!}
+                  date={report.date}
                   content={report.content}
                   amount={report.amount}
+                  onDelete={() => handleDeleteSpend(report.id!)}
                 />
               ))}
             </div>

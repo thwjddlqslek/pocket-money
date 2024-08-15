@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { BigDateSelector } from "./mainStyle";
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -11,17 +10,17 @@ export const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
   z-index: 999;
 `;
-export const ModalContent = styled.div`
+export const ModalContent = styled.div<{ $modalColor: string }>`
   position: relative;
   width: 30rem;
   height: 25rem;
-  border: 1px solid #431ef5;
+  border: 1px solid ${(props) => props.$modalColor};
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
-  color: #431ef5;
+  color: ${(props) => props.$modalColor};
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -39,7 +38,7 @@ export const ModalContent = styled.div`
     border-radius: 1rem;
     border: none;
     background-color: white;
-    color: #431ef5;
+    color: ${(props) => props.$modalColor};
   }
 
   & h1 {
@@ -75,7 +74,7 @@ export const ModalContent = styled.div`
     width: 100%;
     height: 1.8rem;
     padding: 0.5rem;
-    border: 1px solid #431ef5;
+    border: 1px solid ${(props) => props.$modalColor};
     border-radius: 1rem;
     font-size: 1rem;
     outline: none;
@@ -88,7 +87,7 @@ export const ModalContent = styled.div`
   }
 `;
 
-export const SmallDateSelector = styled(BigDateSelector)`
+export const SmallDateSelector = styled.div<{ $modalColor: string }>`
   display: flex;
   justify-content: center;
   width: 22rem;
@@ -99,6 +98,14 @@ export const SmallDateSelector = styled(BigDateSelector)`
   }
   
   select {
+    border: 1px solid ${(props) => props.$modalColor};
+    //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.5rem;
+    margin: 1rem 0 1rem 1rem;
+    border-radius: 1rem;
+    outline: none;
     font-size: 1rem;
     width: 6rem;
     height: 2.7rem;
@@ -108,12 +115,12 @@ export const SmallDateSelector = styled(BigDateSelector)`
   }
 `;
 
-export const RegistButton = styled.div`
+export const RegistButton = styled.div<{ $modalColor: string }>`
   font-size: 1.3rem;
   color: white;
   width: 8rem;
   height: 3rem;
-  background-color: #431ef5;
+  background-color: ${(props) => props.$modalColor};
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -122,7 +129,7 @@ export const RegistButton = styled.div`
   cursor: pointer;
   margin: 2rem 0 1rem;
   &:active {
-    border-color: #301db0;
+    //border-color: #301db0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transform: scale(0.98);
   }
