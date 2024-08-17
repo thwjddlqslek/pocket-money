@@ -23,6 +23,7 @@ const SpendReport: React.FC<SpendReportProps> = ({
   const modifyedDate = date.slice(2);
   const dispatch: AppDispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
+  const [isDelClicked, setIsDelClicked] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
   const [editedAmount, setEditedAmount] = useState(amount);
   const handleUpdateIncome = async () => {
@@ -44,22 +45,38 @@ const SpendReport: React.FC<SpendReportProps> = ({
 
   return (
     <m.OneReport>
-      <div className="icon-box">
-        <button id="update" onClick={() => setIsEditing(!isEditing)}>
-          {isEditing ? "close" : "edit"}
-        </button>
-        {isEditing ? (
+      <div className="icon-box-container">
+        <div className="icon-box">
+          <button id="update" onClick={() => setIsEditing(!isEditing)}>
+            {isEditing ? "close" : "edit"}
+          </button>
+          {isEditing ? (
+            <>
+              <button id="save" onClick={handleUpdateIncome}>
+                save
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                id="delete"
+                onClick={() => setIsDelClicked(!isDelClicked)}
+              >
+                {isDelClicked ? "close" : "del"}
+              </button>
+            </>
+          )}
+        </div>
+        {isDelClicked ? (
           <>
-            <button id="save" onClick={handleUpdateIncome}>
-              save
-            </button>
+            <m.BubbleTail></m.BubbleTail>
+            <m.BubbleIcon>
+              정말로 삭제하시겠습니까?
+              <button onClick={onDelete}>OK</button>
+            </m.BubbleIcon>
           </>
         ) : (
-          <>
-            <button id="delete" onClick={onDelete}>
-              del
-            </button>
-          </>
+          <></>
         )}
       </div>
       <div>

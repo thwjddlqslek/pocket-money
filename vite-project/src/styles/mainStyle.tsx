@@ -136,28 +136,65 @@ export const ReportContainer = styled.div`
     }
   }
 `;
+
+export const BubbleIcon = styled.p`
+  width: 13rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(235, 48, 1, 0.15);
+  font-size: 14px !important;
+  padding-left: 8px;
+  border-radius: 8px;
+  margin: 0 !important;
+
+  button {
+    color: #eb0130;
+    background-color: transparent;
+    border: 1px solid #eb0130 !important;
+    width: 2rem !important;
+    margin: 0 5px 0 0;
+  }
+`;
+
+export const BubbleTail = styled.p`
+  border-top: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 15px solid rgba(235, 48, 1, 0.15);
+  border-bottom: 5px solid transparent;
+  margin: 0 !important;
+`;
 export const OneReport = styled.h1`
   width: 95%;
-  height: 5rem;
+  min-height: 4.5rem;
   margin: 0.5rem;
   border-radius: 1rem;
+  //border: 1px solid black;
   box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   position: relative;
   flex-direction: column;
   justify-content: center;
+  //background-color: pink;
+
+  .icon-box-container {
+    display: flex;
+    justify-content: flex-start;
+  }
   .icon-box {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6rem;
+    position: relative;
+    width: 7rem;
     height: 1rem;
+    //background-color: pink;
   }
   div {
+    height: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    //background-color: skyblue;
   }
   input {
     margin-top: 0.5rem;
@@ -173,11 +210,14 @@ export const OneReport = styled.h1`
   #input-content {
     width: 60%;
     text-align: center;
+    margin-bottom: 0.7rem;
   }
   #input-amount {
     width: 20%;
     text-align: right;
     padding-right: 0.5rem;
+    margin-bottom: 0.7rem;
+
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -185,7 +225,7 @@ export const OneReport = styled.h1`
     }
   }
   p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   button {
@@ -203,12 +243,14 @@ export const OneReport = styled.h1`
   #date {
     width: 22%;
     text-align: left;
+    padding-bottom: 0.7rem;
   }
 
   #content {
     width: 53%;
     word-wrap: break-word;
     text-align: center;
+    padding-bottom: 0.7rem;
   }
   #amount {
     color: #431ef5;
@@ -216,6 +258,7 @@ export const OneReport = styled.h1`
     width: 25%;
     word-wrap: break-word;
     margin-right: 1rem;
+    padding-bottom: 0.7rem;
   }
 
   #update {

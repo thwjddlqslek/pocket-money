@@ -111,6 +111,20 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
     height: 2.7rem;
     box-shadow: none;
     margin: 0 0 0 1rem;
+    &::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      //background: rgba(224, 229, 253, 0.7);
+      background: rgba(0, 0, 0, 0.3);
+
+    }
+    &::-webkit-scrollbar-thumb:active {
+      border-radius: 2px;
+      background: rgba(0, 0, 0, 0.1);
+    }
   }
   }
 `;
