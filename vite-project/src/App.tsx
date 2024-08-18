@@ -3,9 +3,8 @@ import { Provider } from "react-redux";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import store from "./store";
-const App: React.FC = () => {
-  console.log("1");
 
+const App: React.FC = () => {
   return (
     <Provider store={store}>
       <Main />

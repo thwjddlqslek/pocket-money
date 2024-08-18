@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as m from "../styles/mainStyle";
 import RegistModal from "./RegistModal";
@@ -31,8 +31,13 @@ const Main: React.FC = () => {
   const incomeReports = useSelector((state: RootState) => state.income);
   const spendReports = useSelector((state: RootState) => state.spend);
   const dispatch: AppDispatch = useDispatch();
-
+  const isMount = useRef(false);
+  // useEffect로 라이플사이클 제어하기
   useEffect(() => {
+    if (!isMount.current) {
+      isMount.current = true;
+      return;
+    }
     console.log("fetchIncomeReports, fetchSpendReports 수행 완료");
     dispatch(fetchIncomeReports());
     dispatch(fetchSpendReports());

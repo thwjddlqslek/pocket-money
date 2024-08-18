@@ -73,7 +73,7 @@ const IncomeReport: React.FC<IncomeReportProps> = ({
             <m.BubbleTail></m.BubbleTail>
             <m.BubbleIcon>
               정말로 삭제하시겠습니까?
-              <button onClick={onDelete}>OK</button>
+              <button onClick={onDelete}>ok</button>
             </m.BubbleIcon>
           </>
         ) : (

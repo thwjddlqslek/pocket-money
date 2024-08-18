@@ -154,7 +154,7 @@ export const BubbleIcon = styled.p`
     background-color: transparent;
     border: 1px solid #eb0130 !important;
     width: 2rem !important;
-    margin: 0 5px 0 0;
+    margin: 0 3px 0 0;
   }
 `;
 

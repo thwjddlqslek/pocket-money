@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import * as m from "../styles/modalStyle";
 import { SmallDateSelector } from "./SmallDateSelector";
 
@@ -33,6 +33,8 @@ const RegistModal: React.FC<ModalProps> = ({
   const [incomeDate, setIncomeDate] = useState("");
   const [incomeContent, setIncomeContent] = useState("");
   const [incomeAmount, setIncomeAmount] = useState<number | null>(null);
+  const contentRef = useRef<HTMLInputElement | null>(null);
+  const amountRef = useRef<HTMLInputElement | null>(null);
 
   // 지출 modal
   const [spendDate, setSpendDate] = useState("");
@@ -52,6 +54,12 @@ const RegistModal: React.FC<ModalProps> = ({
         setIncomeContent("");
         setIncomeAmount(null);
         setIncomeDate("");
+      } else {
+        if (incomeContent === "" && contentRef.current) {
+          contentRef.current.focus();
+        } else if (incomeAmount === null && amountRef.current) {
+          amountRef.current.focus();
+        }
       }
     } else {
       if (spendDate && spendContent && spendAmount !== null) {
@@ -63,6 +71,12 @@ const RegistModal: React.FC<ModalProps> = ({
         setSpendContent("");
         setSpendAmount(null);
         setSpendDate("");
+      } else {
+        if (spendContent === "" && contentRef.current) {
+          contentRef.current.focus();
+        } else if (spendAmount === null && amountRef.current) {
+          amountRef.current.focus();
+        }
       }
     }
   };
@@ -124,6 +138,7 @@ const RegistModal: React.FC<ModalProps> = ({
               {!isSpendBttClicked ? (
                 <>
                   <input
+                    ref={contentRef}
                     value={incomeContent}
                     maxLength={30}
                     onChange={(e) => setIncomeContent(e.target.value)}
@@ -133,6 +148,7 @@ const RegistModal: React.FC<ModalProps> = ({
               ) : (
                 <>
                   <input
+                    ref={contentRef}
                     value={spendContent}
                     maxLength={30}
                     onChange={(e) => setSpendContent(e.target.value)}
@@ -148,6 +164,7 @@ const RegistModal: React.FC<ModalProps> = ({
               {!isSpendBttClicked ? (
                 <>
                   <input
+                    ref={amountRef}
                     value={incomeAmount ?? ""}
                     maxLength={9}
                     onChange={handleIncomeAmountChange}
@@ -158,6 +175,7 @@ const RegistModal: React.FC<ModalProps> = ({
               ) : (
                 <>
                   <input
+                    ref={amountRef}
                     value={spendAmount ?? ""}
                     maxLength={9}
                     onChange={handleSpendAmountChange}
