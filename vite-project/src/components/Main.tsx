@@ -18,6 +18,7 @@ import {
   addSpendReport,
   deleteSpendReport,
 } from "../store/spendSlice";
+import ChartComponent from "./ChartComponent";
 
 interface Report {
   id?: number;
@@ -57,9 +58,33 @@ const Main: React.FC = () => {
   const handleMonthChange = (month: number) => {
     setSelectedMonth(month);
   };
+  // 년도별 reports 반환
+  const filterReportsByYear = (reports: Report[]) => {
+    return reports.filter((report) => {
+      const reportDate = new Date(report.date);
+      return reportDate.getFullYear() === selectedYear;
+    });
+  };
+  // 월별 총 수입/지출
+  const getMonthTotals = (reports: Report[]) => {
+    const monthTotal: { [key: number]: number } = {};
+    reports.forEach((report) => {
+      const date = new Date(report.date);
+      const month = date.getMonth() + 1;
+      if (!monthTotal[month]) {
+        monthTotal[month] = 0;
+      }
+      monthTotal[month] += report.amount;
+    });
+    return Array.from({ length: 12 }, (_, i) => monthTotal[i + 1] || 0);
+  };
 
   const totalIncome = incomeReports.reduce((acc, curr) => acc + curr.amount, 0);
   const totalSpend = spendReports.reduce((acc, curr) => acc + curr.amount, 0);
+  const filterIncomeData = filterReportsByYear(incomeReports);
+  const filterSpendData = filterReportsByYear(spendReports);
+  const incomeData = getMonthTotals(filterIncomeData);
+  const spendData = getMonthTotals(filterSpendData);
   const [showModal, setShowModal] = useState(false);
   const [modalColor, setModalColor] = useState("#EB0130"); // 지출 기준
   const [modalTitle, setModalTitle] = useState("지출"); // 지출 기준
@@ -118,7 +143,7 @@ const Main: React.FC = () => {
 
   /* ===================================================================================================================== */
 
-  /* 지출 내역 함수 ===================================================================================================*/
+  /* 지출 내역 함수 ====================================a===============================================================*/
   const handleAddSpend = async (report: Report) => {
     try {
       // unwrap() : redux-toolkit createAsyncThunk에서 반환된 Promise의 결과 처리할 때 사용하는 메소드
@@ -233,8 +258,12 @@ const Main: React.FC = () => {
             </div>
           </m.ReportContainer>
         </m.PocketContainer>
-        <m.ChartContainer></m.ChartContainer>
-        <m.ChartContainer></m.ChartContainer>
+        <ChartComponent
+          incomeData={incomeData}
+          spendData={spendData}
+          selectedYear={selectedYear}
+        />
+        <m.PocketContainer></m.PocketContainer>
       </m.MainContainer>
     </>
   );

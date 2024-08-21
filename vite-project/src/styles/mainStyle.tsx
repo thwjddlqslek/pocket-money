@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CommonContainer = styled.div`
   width: 70vw;
-  height: 74vh;
   border: 1px solid #431ef5;
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
@@ -14,16 +13,14 @@ export const CommonContainer = styled.div`
 export const MainContainer = styled.div`
   //background: #f1f5f9;
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
   width: 100%;
-  height: 150%;
 `;
 
 export const PocketContainer = styled(CommonContainer)`
-  margin-top: 6rem;
+  //margin-top: 6rem;
 
   & > div {
     //background: pink;

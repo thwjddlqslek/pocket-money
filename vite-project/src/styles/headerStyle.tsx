@@ -2,10 +2,10 @@ import styled, { keyframes } from "styled-components";
 
 const bounce = keyframes`
 0%, 80% {
-  transform: translateX(-50%) translateY(0);
+  transform:  translateY(0);
 }
 50% {
-  transform: translateX(-50%) translateY(-20px); 
+  transform:  translateY(-20px); 
 }
 `;
 export const StyledHeader = styled.div`
@@ -13,11 +13,10 @@ export const StyledHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: static;
   z-index: 100; /* Blur 영향 받음 */
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  //transform: translateX(-50%);
   width: 80vw;
   height: 5rem;
   min-height: 20px;
@@ -29,12 +28,12 @@ export const StyledHeader = styled.div`
   cursor: pointer;
   transition: background-color 0.1s ease, color 0.1s ease, background 0.1s ease;
 
-  & h1 {
+  h1 {
     font-size: 1.3rem;
-    position: absolute;
-    top: 15px;
-    left: 25%;
-    transform: translateX(-50%);
+    position: relative;
+    text-align: center;
+    right: 18rem;
+    bottom: 1rem;
   }
 
   p {
@@ -45,8 +44,6 @@ export const StyledHeader = styled.div`
     font-weight: 500;
     position: absolute;
     top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   &: hover {
