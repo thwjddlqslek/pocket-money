@@ -19,6 +19,7 @@ import {
   deleteSpendReport,
 } from "../store/spendSlice";
 import ChartComponent from "./ChartComponent";
+import LoginButton from "../components/LoginButton";
 
 interface Report {
   id?: number;
@@ -184,6 +185,7 @@ const Main: React.FC = () => {
   return (
     <>
       <Header totalIncome={totalIncome} totalSpend={totalSpend} />
+      <LoginButton />
       <m.MainContainer>
         <m.PocketContainer>
           <div>
@@ -219,13 +221,13 @@ const Main: React.FC = () => {
           </div>
           <m.TotalContainer>
             <div>
-              수입 :{" "}
+              총 수입 :{" "}
               <m.ColorText color="#431EF5">
                 {totalIncome.toLocaleString()} 원
               </m.ColorText>
             </div>
             <div>
-              지출 :{" "}
+              총 지출 :{" "}
               <m.ColorText color="#EB0130">
                 {totalSpend.toLocaleString()} 원
               </m.ColorText>

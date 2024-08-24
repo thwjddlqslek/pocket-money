@@ -170,7 +170,7 @@ export const OneReport = styled.h1`
   //border: 1px solid black;
   box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  position: relative;
+  //position: relative;
   flex-direction: column;
   justify-content: center;
   //background-color: pink;
@@ -180,7 +180,7 @@ export const OneReport = styled.h1`
     justify-content: flex-start;
   }
   .icon-box {
-    position: relative;
+    //position: relative;
     width: 7rem;
     height: 1rem;
     //background-color: pink;

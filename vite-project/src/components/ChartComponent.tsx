@@ -50,14 +50,14 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         text: `${selectedYear}년 한 눈에 알아보기`,
         font: {
           family: "Noto Sans KR",
-          size: 20,
+          size: 24,
           weight: 400,
         },
         color: "#000000",
       },
     },
     layout: {
-      padding: 10,
+      padding: 14,
     },
     scales: {
       x: {
