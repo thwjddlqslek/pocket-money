@@ -12,7 +12,7 @@ import {
   addIncomeReport,
   deleteIncomeReport,
 } from "../store/incomeSlice";
-
+import supabase from "../supabaseClient";
 import {
   fetchSpendReports,
   addSpendReport,
@@ -20,6 +20,7 @@ import {
 } from "../store/spendSlice";
 import ChartComponent from "./ChartComponent";
 import LoginButton from "../components/LoginButton";
+import { User } from "@supabase/supabase-js";
 
 interface Report {
   id?: number;
@@ -34,15 +35,19 @@ const Main: React.FC = () => {
   const spendReports = useSelector((state: RootState) => state.spend);
   const dispatch: AppDispatch = useDispatch();
   const isMount = useRef(false);
+
   // useEffect로 라이플사이클 제어하기
   useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await supabase.auth.getUser();
+      console.log("fetchIncomeReports, fetchSpendReports 수행 완료");
+      dispatch(fetchIncomeReports());
+      dispatch(fetchSpendReports());
+    };
     if (!isMount.current) {
       isMount.current = true;
-      return;
+      fetchData();
     }
-    console.log("fetchIncomeReports, fetchSpendReports 수행 완료");
-    dispatch(fetchIncomeReports());
-    dispatch(fetchSpendReports());
   }, [dispatch]);
 
   const [selectedYear, setSelectedYear] = useState<number>(

@@ -1,16 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { RootState, AppDispatch } from "../store";
+import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import * as h from "../styles/headerStyle";
 import supabase from "../supabaseClient";
-
+import {
+  fetchIncomeReports,
+  addIncomeReport,
+  deleteIncomeReport,
+} from "../store/incomeSlice";
+import {
+  fetchSpendReports,
+  addSpendReport,
+  deleteSpendReport,
+} from "../store/spendSlice";
 const LoginButton = () => {
   const [isJoinBttClicked, setIsJoinBttClicked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordRe, setPasswordRe] = useState(""); // PW-RE 입력 필드 추가
+  const [passwordRe, setPasswordRe] = useState("");
+  const [showEmail, setShowEmail] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleJoinButton = () => {
-    setIsJoinBttClicked(true);
+  useEffect(() => {
+    const getUserData = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        setShowEmail(true);
+        setUserEmail(user.user_metadata.email.split("@")[0]);
+      }
+    };
+    getUserData();
+    dispatch(fetchIncomeReports());
+    dispatch(fetchSpendReports());
+  }, [dispatch]);
+
+  const handleJoin = () => {
+    setIsJoinBttClicked(!isJoinBttClicked);
   };
 
   const handleCloseModal = () => {
@@ -23,26 +52,56 @@ const LoginButton = () => {
   const handleJoinIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      console.log(data);
-      if (error) {
-        console.error(error);
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "아이디와 비밀번호를 확인해주세요!",
-          showConfirmButton: true,
+      if (password === passwordRe) {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
         });
+        console.log(data);
+        if (error) {
+          console.error(error);
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "아이디와 비밀번호를 확인해주세요!",
+            showConfirmButton: true,
+          });
+        } else {
+          // 회원가입 성공 후, 사용자 정보를 users 테이블에 추가
+          const user = data.user;
+          if (user) {
+            const { error: insertError } = await supabase
+              .from("users")
+              .insert([
+                { id: user.id, email: user.email, created_at: new Date() },
+              ]);
+
+            if (insertError) {
+              console.error(insertError);
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "회원 정보를 저장하는 데 실패했습니다.",
+                showConfirmButton: true,
+              });
+            } else {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "회원가입 성공! 로그인 해주세요.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              handleCloseModal();
+            }
+          }
+        }
       } else {
         Swal.fire({
           position: "center",
-          icon: "success",
-          title: "회원가입 성공! 로그인 해주세요.",
-          showConfirmButton: false,
-          timer: 1500,
+          icon: "error",
+          title: "비밀번호가 일치하지 않아요!",
+          showConfirmButton: true,
         });
       }
     } catch (error) {
@@ -60,7 +119,12 @@ const LoginButton = () => {
       console.log(data);
       if (error) {
         console.error(error);
-        alert("일치하지 않습니다");
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "아이디와 비밀번호를 확인해주세요!",
+          showConfirmButton: true,
+        });
       } else {
         Swal.fire({
           position: "center",
@@ -70,54 +134,91 @@ const LoginButton = () => {
           timer: 1500,
         });
         handleCloseModal();
+        setShowEmail(true);
+        setUserEmail(data.user.user_metadata.email.split("@")[0]);
+        dispatch(fetchIncomeReports());
+        dispatch(fetchSpendReports());
       }
     } catch (error) {
       console.error(error);
     }
   };
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "로그아웃 성공!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    setShowEmail(false);
+    setUserEmail("");
+    dispatch(fetchIncomeReports());
+    dispatch(fetchSpendReports());
+  };
 
   return (
     <>
-      <h.JoinButtonStyle onClick={handleJoinButton}>
-        <div>Join!</div>
-      </h.JoinButtonStyle>
-      {isJoinBttClicked && (
-        <h.LoginModal>
-          <h1>가입해서 더 간편하게!</h1>
-          <div className="inputs">
-            <p>EMAIL</p>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <p>PW</p>
-            <input
-              type="password"
-              placeholder="비밀번호 6자 이상 입력하시오."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p>PW-RE</p>
-            <input
-              type="password"
-              placeholder="비밀번호를 재입력하시오."
-              value={passwordRe}
-              onChange={(e) => setPasswordRe(e.target.value)}
-            />
-          </div>
-          <div className="buttons">
-            <button type="button" onClick={handleCloseModal} id="close">
-              닫기
-            </button>
-            <button onClick={handleSignIn} id="login">
-              로그인
-            </button>
-            <button onClick={handleJoinIn} id="join">
-              회원가입
-            </button>
-          </div>
-        </h.LoginModal>
+      {!showEmail ? (
+        <>
+          <h.JoinButtonStyle
+            onClick={() => {
+              handleJoin();
+            }}
+          >
+            <div>Login</div>
+          </h.JoinButtonStyle>
+          {isJoinBttClicked && (
+            <h.LoginModal>
+              <h1>가입해서 더 간편하게!</h1>
+              <div className="inputs">
+                <p>EMAIL</p>
+                <input
+                  type="email"
+                  placeholder="이메일을 입력하시오."
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <p>PW</p>
+                <input
+                  type="password"
+                  placeholder="비밀번호 6자 이상 입력하시오."
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <p>PW-RE</p>
+                <input
+                  type="password"
+                  placeholder="회원가입 경우에만 입력하시오."
+                  value={passwordRe}
+                  onChange={(e) => setPasswordRe(e.target.value)}
+                />
+              </div>
+              <div className="buttons">
+                <button type="button" onClick={handleCloseModal} id="close">
+                  닫기
+                </button>
+                <button onClick={handleSignIn} id="login">
+                  로그인
+                </button>
+                <button onClick={handleJoinIn} id="join">
+                  회원가입
+                </button>
+              </div>
+            </h.LoginModal>
+          )}
+        </>
+      ) : (
+        <>
+          <h.MyContainer>
+            <h.LogoutButtonStyle onClick={handleLogout}>
+              <div>Logout</div>
+            </h.LogoutButtonStyle>
+            <h1>안녕하세요!</h1>
+            <p>{userEmail}님</p>
+          </h.MyContainer>
+        </>
       )}
     </>
   );

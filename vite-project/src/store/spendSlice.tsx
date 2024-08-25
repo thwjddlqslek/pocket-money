@@ -8,13 +8,35 @@ interface Report {
   amount: number;
 }
 
+const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    return null;
+  }
+  return data.user;
+};
+
 // 지출 내역 불러오기
 export const fetchSpendReports = createAsyncThunk<Report[]>(
   "spend/fetchSpendReports",
   async () => {
-    const { data, error } = await supabase.from("spend_reports").select("*");
+    const user = await getCurrentUser();
+    let query = supabase.from("spend_reports").select("*");
 
-    if (error) throw error;
+    if (user) {
+      // user_id가 있는 경우 해당 사용자의 데이터만 가져옴
+      query = query.eq("user_id", user.id);
+    } else {
+      // user_id가 null인 경우 null을 비교하기 위해 is 사용
+      query = query.is("user_id", null);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Error fetching spend reports:", error.message);
+      throw error;
+    }
 
     return data as Report[];
   }
@@ -24,9 +46,11 @@ export const fetchSpendReports = createAsyncThunk<Report[]>(
 export const addSpendReport = createAsyncThunk<Report, Report>(
   "spend/addSpendReport",
   async (report: Report) => {
+    const user = await getCurrentUser();
+
     const { data, error } = await supabase
       .from("spend_reports")
-      .insert([report]) // insert() 배열 형식으로 데이터 처리(단일 객체도 배열)
+      .insert([{ ...report, user_id: user?.id ?? null }]) // insert() 배열 형식으로 데이터 처리(단일 객체도 배열)
       // 왜 배열인가? insert 메서드는 배열 형식으로 데이터 처리.
       // 단일 객체도 배열로 감싸야 올바르게 처리된다.
       .select(); // select() 없으면 삽입된 데이터 반환X
@@ -82,10 +106,13 @@ export const updateSpendReport = createAsyncThunk<Report, Report>(
 export const deleteSpendReport = createAsyncThunk(
   "spend/deleteSpendReport",
   async (id: number) => {
+    const user = await getCurrentUser();
+    if (!user) throw new Error("회원 인증이 실패되었습니다.");
     const { error } = await supabase
       .from("spend_reports")
       .delete()
-      .eq("id", id);
+      .eq("id", id)
+      .eq("user_id", user.id);
     if (error) {
       throw new Error(error.message);
     }
