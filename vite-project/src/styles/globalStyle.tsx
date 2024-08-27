@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-
 const GlobalStyle = createGlobalStyle`
 ${reset};
 
@@ -15,5 +14,5 @@ body {
     font-size: 1.5em;
     justify-content: center;
 }
-`
+`;
 export default GlobalStyle;

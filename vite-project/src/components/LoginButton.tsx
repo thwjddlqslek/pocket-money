@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import { RootState, AppDispatch } from "../store";
-import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import * as h from "../styles/headerStyle";
 import supabase from "../supabaseClient";
-import {
-  fetchIncomeReports,
-  addIncomeReport,
-  deleteIncomeReport,
-} from "../store/incomeSlice";
-import {
-  fetchSpendReports,
-  addSpendReport,
-  deleteSpendReport,
-} from "../store/spendSlice";
+import { fetchIncomeReports } from "../store/incomeSlice";
+import { fetchSpendReports } from "../store/spendSlice";
 const LoginButton = () => {
   const [isJoinBttClicked, setIsJoinBttClicked] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,8 +26,6 @@ const LoginButton = () => {
       }
     };
     getUserData();
-    dispatch(fetchIncomeReports());
-    dispatch(fetchSpendReports());
   }, [dispatch]);
 
   const handleJoin = () => {
@@ -170,7 +160,7 @@ const LoginButton = () => {
             <div>Login</div>
           </h.JoinButtonStyle>
           {isJoinBttClicked && (
-            <h.LoginModal>
+            <h.LoginModal $isVisible={isJoinBttClicked}>
               <h1>가입해서 더 간편하게!</h1>
               <div className="inputs">
                 <p>EMAIL</p>

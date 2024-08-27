@@ -20,7 +20,7 @@ import {
 } from "../store/spendSlice";
 import ChartComponent from "./ChartComponent";
 import LoginButton from "../components/LoginButton";
-import { User } from "@supabase/supabase-js";
+import ThemeButton from "./ThemeButton";
 
 interface Report {
   id?: number;
@@ -191,6 +191,7 @@ const Main: React.FC = () => {
     <>
       <Header totalIncome={totalIncome} totalSpend={totalSpend} />
       <LoginButton />
+      <ThemeButton />
       <m.MainContainer>
         <m.PocketContainer>
           <div>

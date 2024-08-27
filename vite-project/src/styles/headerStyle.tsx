@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 const bounce = keyframes`
 0%, 80% {
@@ -7,6 +7,28 @@ const bounce = keyframes`
 50% {
   transform:  translateY(-20px); 
 }
+`;
+
+const slideUp = keyframes`
+  from {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideDown = keyframes`
+  from {
+    transform: translateY(-20%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0;
+  }
 `;
 export const StyledHeader = styled.div`
   background: rgba(224, 229, 253, 0.7);
@@ -24,7 +46,7 @@ export const StyledHeader = styled.div`
   overflow: hidden;
   //border : 2px solid #000;
   border-radius: 2rem;
-  color: #431ef5;
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
   transition: background-color 0.1s ease, color 0.1s ease, background 0.1s ease;
 
@@ -96,7 +118,7 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
   //margin: 1rem 0 0 1rem;
 `;
 
-export const LoginModal = styled.div`
+export const LoginModal = styled.div<{ $isVisible: boolean }>`
   width: 22rem;
   height: 15rem;
   background: #fff;
@@ -113,6 +135,14 @@ export const LoginModal = styled.div`
   padding: 2rem 2.5rem 2.5rem 2rem;
   color: #431ef5;
   box-shadow: 6px 8px 7px rgba(0, 0, 0, 0.15);
+  animation: ${(props) =>
+    props.$isVisible
+      ? css`
+          ${slideUp} 0.5s ease-out forwards
+        `
+      : css`
+          ${slideDown} 0.5s ease-out forwards
+        `};
 
   h1 {
     grid-column: 1 / -1;
@@ -209,4 +239,22 @@ export const MyContainer = styled.div`
     word-break: break-word;
     //background: pink;
   }
+`;
+
+export const ThemeButton = styled.div`
+  width: 5rem;
+  height: 2rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  cursor: pointer;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  color: #431ef5;
+  border: 1px solid #431ef5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem 1rem 0 0;
 `;

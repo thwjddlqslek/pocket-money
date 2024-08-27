@@ -107,15 +107,25 @@ export const deleteIncomeReport = createAsyncThunk(
   "income/deleteIncomeReport",
   async (id: number) => {
     const user = await getCurrentUser();
-    if (!user) throw new Error("회원 인증이 실패되었습니다.");
-    const { error } = await supabase
-      .from("income_reports")
-      .delete()
-      .eq("id", id)
-      .eq("user_id", user.id);
-    if (error) {
-      throw new Error(error.message);
+    if (user) {
+      const { error } = await supabase
+        .from("income_reports")
+        .delete()
+        .eq("id", id)
+        .eq("user_id", user.id);
+      if (error) {
+        throw new Error(error.message);
+      }
+    } else {
+      const { error } = await supabase
+        .from("income_reports")
+        .delete()
+        .eq("id", id);
+      if (error) {
+        throw new Error(error.message);
+      }
     }
+
     return id; // 성공적으로 삭제된 항목의 ID를 반환
   }
 );

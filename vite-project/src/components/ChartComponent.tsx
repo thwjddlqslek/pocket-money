@@ -11,6 +11,7 @@ import {
 
 import { Bar } from "react-chartjs-2";
 import * as m from "../styles/mainStyle";
+import { memo, useMemo } from "react";
 
 interface ChartComponentProps {
   incomeData: number[];
@@ -23,7 +24,6 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
   spendData,
   selectedYear,
 }) => {
-  console.log(incomeData, spendData, selectedYear);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -33,94 +33,101 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
     Legend
   );
 
-  const options: ChartOptions<"bar"> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-        labels: {
-          color: "#000000",
-          font: {
-            size: 16,
+  const options = useMemo<ChartOptions<"bar">>(
+    () => ({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+          labels: {
+            color: "#000000",
+            font: {
+              size: 16,
+            },
           },
         },
-      },
-      title: {
-        display: true,
-        text: `${selectedYear}년 한 눈에 알아보기`,
-        font: {
-          family: "Noto Sans KR",
-          size: 24,
-          weight: 400,
-        },
-        color: "#000000",
-      },
-    },
-    layout: {
-      padding: 14,
-    },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          color: "#000000",
-          font: {
-            size: 15,
-          },
-        },
-      },
-      y: {
-        grid: {
+        title: {
           display: true,
-          color: "rgba(224, 229, 253, 0.7)",
-        },
-        ticks: {
-          color: "#000000",
+          text: `${selectedYear}년 한 눈에 알아보기`,
           font: {
-            size: 15,
+            family: "Noto Sans KR",
+            size: 24,
+            weight: 400,
+          },
+          color: "#000000",
+        },
+      },
+      layout: {
+        padding: 14,
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "#000000",
+            font: {
+              size: 15,
+            },
+          },
+        },
+        y: {
+          grid: {
+            display: true,
+            color: "rgba(224, 229, 253, 0.7)",
+          },
+          ticks: {
+            color: "#000000",
+            font: {
+              size: 15,
+            },
           },
         },
       },
-    },
-  };
-  const labels = [
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ];
+    }),
+    [selectedYear]
+  );
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "수입",
-        data: incomeData,
-        backgroundColor: "rgba(67, 30, 245, 0.4)",
-        borderColor: "#431ef5",
-        borderWidth: 1.5,
-        borderRadius: 6,
-      },
-      {
-        label: "지출",
-        data: spendData,
-        backgroundColor: "rgba(235, 1, 48, 0.4)",
-        borderColor: "#EB0130",
-        borderWidth: 1.5,
-        borderRadius: 6,
-      },
-    ],
-  };
+  const data = useMemo(() => {
+    const labels = [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+    ];
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: "수입",
+          data: incomeData,
+          backgroundColor: "rgba(67, 30, 245, 0.4)",
+          borderColor: "#431ef5",
+          borderWidth: 1.5,
+          borderRadius: 6,
+        },
+        {
+          label: "지출",
+          data: spendData,
+          backgroundColor: "rgba(235, 1, 48, 0.4)",
+          borderColor: "#EB0130",
+          borderWidth: 1.5,
+          borderRadius: 6,
+        },
+      ],
+    };
+  }, [incomeData, spendData]);
+  console.log("incomeData:", incomeData);
 
   return (
     <m.ChartContainer>
@@ -133,4 +140,4 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
   );
 };
 
-export default ChartComponent;
+export default memo(ChartComponent);
