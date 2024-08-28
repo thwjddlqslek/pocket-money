@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CommonContainer = styled.div`
   width: 70vw;
-  border: 1px solid #431ef5;
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
@@ -49,7 +49,7 @@ export const BigDateSelector = styled.div`
 
   & select {
     width: 7rem;
-    border: 1px solid #431ef5;
+    border: 1px solid ${({ theme }) => theme.text};
     //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 1.2rem;
@@ -111,7 +111,7 @@ export const ReportContainer = styled.div`
     display: flex;
     width: 47%;
     min-height: 35px;
-    border: 1px solid #431ef5;
+    border: 1px solid ${({ theme }) => theme.text};
     border-radius: 1rem;
     align-items: center;
     //justify-content: flex-start;

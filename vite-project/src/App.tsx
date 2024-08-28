@@ -4,15 +4,16 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import store from "./store";
 import ThemeContextProvider from "./context/ThemeContext";
+import GlobalStyle from "./styles/globalStyle";
 
 const App: React.FC = () => {
   return (
-    <ThemeContextProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ThemeContextProvider>
+        <GlobalStyle />
         <Main />
-        <Footer />
-      </Provider>
-    </ThemeContextProvider>
+      </ThemeContextProvider>
+    </Provider>
   );
 };
 

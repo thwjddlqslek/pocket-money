@@ -31,7 +31,7 @@ const slideDown = keyframes`
   }
 `;
 export const StyledHeader = styled.div`
-  background: rgba(224, 229, 253, 0.7);
+  background: ${({ theme }) => theme.bgcolor};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,10 +69,11 @@ export const StyledHeader = styled.div`
   }
 
   &: hover {
-    background: radial-gradient(
+    background: ${({ theme }) => theme.clicked};
+    /* radial-gradient(
       rgba(223, 231, 253, 0.9),
       rgba(203, 200, 253, 0.9)
-    );
+    ); */
   }
 
   &: active {
@@ -90,8 +91,9 @@ export const ButtonStyle = styled.div`
   border-radius: 5rem;
   cursor: pointer;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  color: #431ef5;
-  border: 1px solid #431ef5;
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.body};
+  border: 1px solid ${({ theme }) => theme.text};
 `;
 
 export const LoginButtonStyle = styled(ButtonStyle)`
@@ -113,7 +115,7 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
   top: 0;
   left: 0;
   margin-top: 1rem;
-  background: rgba(224, 229, 253, 0.9);
+  background: ${({ theme }) => theme.clicked};
 
   //margin: 1rem 0 0 1rem;
 `;
@@ -121,8 +123,8 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
 export const LoginModal = styled.div<{ $isVisible: boolean }>`
   width: 22rem;
   height: 15rem;
-  background: #fff;
-  border: 1px solid #431ef5;
+  background: ${({ theme }) => theme.body};
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 1rem;
   display: grid;
   grid-template-columns: 1fr 3.5fr; /* 레이블과 입력 필드의 열 크기 설정 */
@@ -133,7 +135,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   left: 0;
   margin: 4rem 0 0 1rem;
   padding: 2rem 2.5rem 2.5rem 2rem;
-  color: #431ef5;
+  color: ${({ theme }) => theme.text};
   box-shadow: 6px 8px 7px rgba(0, 0, 0, 0.15);
   animation: ${(props) =>
     props.$isVisible
@@ -153,7 +155,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
 
   p {
     font-size: 1.2rem;
-    color: #431ef5;
+    color: ${({ theme }) => theme.text};
     margin: 0;
     align-items: center;
     //justify-content: center;
@@ -166,7 +168,8 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
 
   input {
     outline: none;
-    border: 1px solid #431ef5;
+    border: 1px solid ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.body};
     border-radius: 1rem;
     padding: 0.6rem;
     font-size: 1rem;
@@ -184,7 +187,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
     height: 2rem;
     border: none;
     border-radius: 1rem;
-    background: white;
+    background: ${({ theme }) => theme.text};
     font-family: "Noto Sans KR", sans-serif;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.05);
     cursor: pointer;
@@ -192,23 +195,23 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   }
 
   #close {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(160, 160, 160, 1);
   }
 
   #login {
-    background-color: rgba(0, 135, 79, 0.2);
+    background-color: rgba(0, 135, 79, 1);
   }
 
   #join {
-    background-color: rgba(67, 30, 245, 0.15);
+    background-color: rgba(67, 30, 245, 1);
   }
 `;
 
 export const MyContainer = styled.div`
   width: 9rem;
   height: 8rem;
-  background: #fff;
-  border: 1px solid #431ef5;
+  background: ${({ theme }) => theme.body};
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 1rem;
   display: flex;
   position: fixed;
@@ -217,7 +220,7 @@ export const MyContainer = styled.div`
   top: 0;
   left: 0;
   margin: 1rem 0 0 1rem;
-  color: #431ef5;
+  color: ${({ theme }) => theme.text};
   box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.15);
 
   h1 {
@@ -251,8 +254,9 @@ export const ThemeButton = styled.div`
   border-radius: 5rem;
   cursor: pointer;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  color: #431ef5;
-  border: 1px solid #431ef5;
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.body};
+  border: 1px solid ${({ theme }) => theme.text};
   position: fixed;
   top: 0;
   right: 0;
