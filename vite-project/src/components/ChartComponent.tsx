@@ -11,7 +11,9 @@ import {
 
 import { Bar } from "react-chartjs-2";
 import * as m from "../styles/mainStyle";
-import { memo, useMemo } from "react";
+import { memo, useContext, useMemo } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { darkTheme, lightTheme } from "../styles/theme";
 
 interface ChartComponentProps {
   incomeData: number[];
@@ -24,6 +26,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
   spendData,
   selectedYear,
 }) => {
+  const { isDarkMode } = useContext(ThemeContext);
+  const theme = isDarkMode ? darkTheme : lightTheme;
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -40,7 +44,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         legend: {
           position: "top",
           labels: {
-            color: "#000000",
+            color: theme.text,
             font: {
               size: 16,
             },
@@ -54,7 +58,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             size: 24,
             weight: 400,
           },
-          color: "#000000",
+          color: theme.text,
         },
       },
       layout: {
@@ -66,7 +70,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             display: false,
           },
           ticks: {
-            color: "#000000",
+            color: theme.text,
             font: {
               size: 15,
             },
@@ -78,7 +82,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
             color: "rgba(224, 229, 253, 0.7)",
           },
           ticks: {
-            color: "#000000",
+            color: theme.text,
             font: {
               size: 15,
             },
@@ -86,7 +90,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         },
       },
     }),
-    [selectedYear]
+    [selectedYear, theme]
   );
 
   const data = useMemo(() => {
@@ -115,6 +119,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           borderColor: "#431ef5",
           borderWidth: 1.5,
           borderRadius: 6,
+          color: "white",
         },
         {
           label: "지출",

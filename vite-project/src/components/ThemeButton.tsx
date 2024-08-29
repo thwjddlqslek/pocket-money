@@ -7,7 +7,7 @@ export const ThemeButton = () => {
 
   return (
     <h.ThemeButton onClick={themeBttClicked}>
-      {isDarkMode ? "라이트 모드" : "다크 모드"}
+      {isDarkMode ? "Light" : "Dark"}
     </h.ThemeButton>
   );
 };

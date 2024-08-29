@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const CommonContainer = styled.div`
   width: 70vw;
-  border: 1px solid ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.body};
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
@@ -17,6 +19,7 @@ export const MainContainer = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  background: ${({ theme }) => theme.body};
 `;
 
 export const PocketContainer = styled(CommonContainer)`
@@ -49,7 +52,9 @@ export const BigDateSelector = styled.div`
 
   & select {
     width: 7rem;
-    border: 1px solid ${({ theme }) => theme.text};
+    border: 1px solid ${({ theme }) => theme.border};
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.body};
     //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 1.2rem;
@@ -111,7 +116,7 @@ export const ReportContainer = styled.div`
     display: flex;
     width: 47%;
     min-height: 35px;
-    border: 1px solid ${({ theme }) => theme.text};
+    border: 1px solid ${({ theme }) => theme.border};
     border-radius: 1rem;
     align-items: center;
     //justify-content: flex-start;
@@ -167,7 +172,7 @@ export const OneReport = styled.h1`
   min-height: 4.5rem;
   margin: 0.5rem;
   border-radius: 1rem;
-  //border: 1px solid black;
+  border: 1px solid white;
   box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   //position: relative;

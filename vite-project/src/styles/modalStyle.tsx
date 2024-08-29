@@ -21,7 +21,7 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
   color: ${(props) => props.$modalColor};
-  background-color: white;
+  background: ${({ theme }) => theme.body};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +39,7 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
     border: none;
     background-color: white;
     color: ${(props) => props.$modalColor};
+    background: ${({ theme }) => theme.body};
   }
 
   & h1 {
@@ -78,6 +79,8 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
     border-radius: 1rem;
     font-size: 1rem;
     outline: none;
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -111,6 +114,9 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
     height: 2.7rem;
     box-shadow: none;
     margin: 0 0 0 1rem;
+  background: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+    
     &::-webkit-scrollbar {
       width: 7px;
       height: 7px;

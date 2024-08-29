@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../styles/theme";
 
@@ -7,7 +7,13 @@ export const ThemeContext = createContext({
   themeBttClicked: () => {},
 });
 
-export const ThemeContextProvider = ({ children }) => {
+interface ThemeContextProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
+  children,
+}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const themeBttClicked = () => {
     setIsDarkMode((isDarkMode) => !isDarkMode);

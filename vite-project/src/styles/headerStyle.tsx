@@ -32,6 +32,7 @@ const slideDown = keyframes`
 `;
 export const StyledHeader = styled.div`
   background: ${({ theme }) => theme.bgcolor};
+  border: 1px solid ${({ theme }) => theme.headerbr};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +47,7 @@ export const StyledHeader = styled.div`
   overflow: hidden;
   //border : 2px solid #000;
   border-radius: 2rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   cursor: pointer;
   transition: background-color 0.1s ease, color 0.1s ease, background 0.1s ease;
 
@@ -91,9 +92,9 @@ export const ButtonStyle = styled.div`
   border-radius: 5rem;
   cursor: pointer;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.body};
-  border: 1px solid ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.border};
 `;
 
 export const LoginButtonStyle = styled(ButtonStyle)`
@@ -124,7 +125,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   width: 22rem;
   height: 15rem;
   background: ${({ theme }) => theme.body};
-  border: 1px solid ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.border};
   border-radius: 1rem;
   display: grid;
   grid-template-columns: 1fr 3.5fr; /* 레이블과 입력 필드의 열 크기 설정 */
@@ -135,7 +136,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   left: 0;
   margin: 4rem 0 0 1rem;
   padding: 2rem 2.5rem 2.5rem 2rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   box-shadow: 6px 8px 7px rgba(0, 0, 0, 0.15);
   animation: ${(props) =>
     props.$isVisible
@@ -155,7 +156,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
 
   p {
     font-size: 1.2rem;
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.border};
     margin: 0;
     align-items: center;
     //justify-content: center;
@@ -168,8 +169,9 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
 
   input {
     outline: none;
-    border: 1px solid ${({ theme }) => theme.text};
+    border: 1px solid ${({ theme }) => theme.border};
     background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
     border-radius: 1rem;
     padding: 0.6rem;
     font-size: 1rem;
@@ -186,8 +188,8 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   button {
     height: 2rem;
     border: none;
+    color: ${({ theme }) => theme.text};
     border-radius: 1rem;
-    background: ${({ theme }) => theme.text};
     font-family: "Noto Sans KR", sans-serif;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.05);
     cursor: pointer;
@@ -211,7 +213,7 @@ export const MyContainer = styled.div`
   width: 9rem;
   height: 8rem;
   background: ${({ theme }) => theme.body};
-  border: 1px solid ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.border};
   border-radius: 1rem;
   display: flex;
   position: fixed;
@@ -220,13 +222,13 @@ export const MyContainer = styled.div`
   top: 0;
   left: 0;
   margin: 1rem 0 0 1rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.15);
 
   h1 {
     font-size: 1.2rem;
+    color: ${({ theme }) => theme.border};
     font-weight: 500;
-    color: #000;
     margin: 1rem 0 0.5rem 0;
   }
 
@@ -250,13 +252,14 @@ export const ThemeButton = styled.div`
   font-size: 1rem;
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
   border-radius: 5rem;
   cursor: pointer;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.body};
-  border: 1px solid ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.border};
   position: fixed;
   top: 0;
   right: 0;
