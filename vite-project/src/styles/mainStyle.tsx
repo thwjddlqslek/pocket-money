@@ -6,7 +6,7 @@ export const CommonContainer = styled.div`
   color: ${({ theme }) => theme.text};
   background: ${({ theme }) => theme.body};
   border-radius: 1rem;
-  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 12px ${({ theme }) => theme.shadow};
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -130,11 +130,11 @@ export const ReportContainer = styled.div`
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 2px;
-      background: rgba(224, 229, 253, 0.7);
+      background: ${({ theme }) => theme.scrollBar};
     }
     &::-webkit-scrollbar-thumb:active {
       border-radius: 2px;
-      background: rgba(67, 30, 245, 0.5);
+      background: ${({ theme }) => theme.scrollActive};
     }
   }
 `;
@@ -145,7 +145,7 @@ export const BubbleIcon = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(235, 48, 1, 0.15);
+  background-color: rgba(235, 48, 1, 0.25);
   font-size: 14px !important;
   padding-left: 8px;
   border-radius: 8px;
@@ -172,8 +172,8 @@ export const OneReport = styled.h1`
   min-height: 4.5rem;
   margin: 0.5rem;
   border-radius: 1rem;
-  border: 1px solid white;
-  box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.1);
+  //border: 1px solid white;
+  box-shadow: 3px 7px 10px ${({ theme }) => theme.shadow};
   display: flex;
   //position: relative;
   flex-direction: column;
@@ -202,7 +202,7 @@ export const OneReport = styled.h1`
     margin-top: 0.5rem;
     height: 2rem;
     outline: none;
-    background: rgba(224, 229, 253, 0.7);
+    background: rgba(224, 229, 253, 0.5);
     //border: 1px solid #431ef5;
     border: none;
     border-radius: 10px;
@@ -254,8 +254,16 @@ export const OneReport = styled.h1`
     text-align: center;
     padding-bottom: 0.7rem;
   }
-  #amount {
-    color: #431ef5;
+  #amount-income {
+    color: ${({ theme }) => theme.income};
+    text-align: right;
+    width: 25%;
+    word-wrap: break-word;
+    margin-right: 1rem;
+    padding-bottom: 0.7rem;
+  }
+  #amount-spend {
+    color: ${({ theme }) => theme.spend};
     text-align: right;
     width: 25%;
     word-wrap: break-word;
@@ -265,17 +273,17 @@ export const OneReport = styled.h1`
 
   #update {
     color: #00874f;
-    background-color: rgba(0, 135, 79, 0.2);
+    background-color: rgba(0, 135, 79, 0.3);
   }
 
   #save {
     color: #431ef5;
-    background-color: rgba(67, 30, 245, 0.15);
+    background-color: rgba(67, 30, 245, 0.3);
   }
 
   #delete {
     color: #eb0130;
-    background-color: rgba(235, 48, 1, 0.15);
+    background-color: rgba(235, 48, 1, 0.25);
   }
 `;
 

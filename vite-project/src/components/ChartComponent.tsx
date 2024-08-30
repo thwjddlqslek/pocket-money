@@ -115,8 +115,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         {
           label: "수입",
           data: incomeData,
-          backgroundColor: "rgba(67, 30, 245, 0.4)",
-          borderColor: "#431ef5",
+          backgroundColor: theme.chartIn,
+          borderColor: theme.income,
           borderWidth: 1.5,
           borderRadius: 6,
           color: "white",
@@ -124,8 +124,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
         {
           label: "지출",
           data: spendData,
-          backgroundColor: "rgba(235, 1, 48, 0.4)",
-          borderColor: "#EB0130",
+          backgroundColor: theme.chartSp,
+          borderColor: theme.spend,
           borderWidth: 1.5,
           borderRadius: 6,
         },

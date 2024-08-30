@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as m from "../styles/mainStyle";
 import RegistModal from "./RegistModal";
@@ -21,6 +21,8 @@ import {
 import ChartComponent from "./ChartComponent";
 import LoginButton from "../components/LoginButton";
 import ThemeButton from "./ThemeButton";
+import { ThemeContext } from "../context/ThemeContext";
+import { darkTheme, lightTheme } from "../styles/theme";
 
 interface Report {
   id?: number;
@@ -185,6 +187,8 @@ const Main: React.FC = () => {
     }
   });
 
+  const { isDarkMode } = useContext(ThemeContext);
+
   /* ===================================================================================================================== */
 
   return (
@@ -203,14 +207,26 @@ const Main: React.FC = () => {
             <p>의 수입과 지출 내역</p>
             <div className="button-container">
               <m.AddButton
-                $bgColor="#431EF5"
-                onClick={() => clickShowModal("#431ef5", "수입", false)}
+                $bgColor={isDarkMode ? darkTheme.income : lightTheme.income}
+                onClick={() =>
+                  clickShowModal(
+                    isDarkMode ? darkTheme.income : lightTheme.income,
+                    "수입",
+                    false
+                  )
+                }
               >
                 수입+
               </m.AddButton>
               <m.AddButton
-                $bgColor="#EB0130"
-                onClick={() => clickShowModal("#EB0130", "지출", true)}
+                $bgColor={isDarkMode ? darkTheme.spend : lightTheme.spend}
+                onClick={() =>
+                  clickShowModal(
+                    isDarkMode ? darkTheme.spend : lightTheme.spend,
+                    "지출",
+                    true
+                  )
+                }
               >
                 지출+
               </m.AddButton>
@@ -228,13 +244,17 @@ const Main: React.FC = () => {
           <m.TotalContainer>
             <div>
               총 수입 :{" "}
-              <m.ColorText color="#431EF5">
+              <m.ColorText
+                color={isDarkMode ? darkTheme.income : lightTheme.income}
+              >
                 {totalIncome.toLocaleString()} 원
               </m.ColorText>
             </div>
             <div>
               총 지출 :{" "}
-              <m.ColorText color="#EB0130">
+              <m.ColorText
+                color={isDarkMode ? darkTheme.spend : lightTheme.spend}
+              >
                 {totalSpend.toLocaleString()} 원
               </m.ColorText>
             </div>

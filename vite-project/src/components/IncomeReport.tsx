@@ -102,7 +102,7 @@ const IncomeReport: React.FC<IncomeReportProps> = ({
         ) : (
           <>
             <p id="content">{content}</p>
-            <p id="amount">{formateAmout}</p>
+            <p id="amount-income">{formateAmout}</p>
           </>
         )}
       </div>

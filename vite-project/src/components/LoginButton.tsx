@@ -36,7 +36,7 @@ const LoginButton = () => {
     setIsJoinBttClicked(false);
     setEmail("");
     setPassword("");
-    setPasswordRe(""); // PW-RE 필드 초기화
+    setPasswordRe("");
   };
 
   const handleJoinIn = async (e: React.FormEvent) => {
@@ -152,35 +152,31 @@ const LoginButton = () => {
     <>
       {!showEmail ? (
         <>
-          <h.JoinButtonStyle
-            onClick={() => {
-              handleJoin();
-            }}
-          >
+          <h.JoinButtonStyle onClick={handleJoin}>
             <div>Login</div>
           </h.JoinButtonStyle>
           {isJoinBttClicked && (
             <h.LoginModal $isVisible={isJoinBttClicked}>
-              <h1>가입해서 더 간편하게!</h1>
+              <h1>가입해서 따로 관리해보자!</h1>
               <div className="inputs">
                 <p>EMAIL</p>
                 <input
                   type="email"
-                  placeholder="이메일을 입력하시오."
+                  placeholder="이메일 형식에 맞게 입력해주세요."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <p>PW</p>
                 <input
                   type="password"
-                  placeholder="비밀번호 6자 이상 입력하시오."
+                  placeholder="비밀번호 6자 이상 입력해주세요."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <p>PW-RE</p>
                 <input
                   type="password"
-                  placeholder="회원가입 경우에만 입력하시오."
+                  placeholder="회원가입 경우에만 입력해주세요."
                   value={passwordRe}
                   onChange={(e) => setPasswordRe(e.target.value)}
                 />

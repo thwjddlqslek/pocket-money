@@ -23,16 +23,16 @@ const slideUp = keyframes`
 const slideDown = keyframes`
   from {
     transform: translateY(-20%);
-    opacity: 1;
+    opacity: 0;
   }
   to {
     transform: translateY(0);
-    opacity: 0;
+    opacity: 1;
   }
 `;
 export const StyledHeader = styled.div`
   background: ${({ theme }) => theme.bgcolor};
-  border: 1px solid ${({ theme }) => theme.headerbr};
+  //border: 1px solid ${({ theme }) => theme.headerbr};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,7 @@ export const StyledHeader = styled.div`
   width: 75vw;
   height: 5rem;
   min-height: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px ${({ theme }) => theme.shadow};
   overflow: hidden;
   //border : 2px solid #000;
   border-radius: 2rem;
@@ -197,15 +197,18 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   }
 
   #close {
-    background-color: rgba(160, 160, 160, 1);
+    background-color: rgba(160, 160, 160, 0.7);
+    color: ${({ theme }) => theme.body};
   }
 
   #login {
-    background-color: rgba(0, 135, 79, 1);
+    background-color: ${({ theme }) => theme.income};
+    color: ${({ theme }) => theme.body};
   }
 
   #join {
-    background-color: rgba(67, 30, 245, 1);
+    background-color: ${({ theme }) => theme.spend};
+    color: ${({ theme }) => theme.body};
   }
 `;
 

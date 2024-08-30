@@ -101,7 +101,7 @@ const SpendReport: React.FC<SpendReportProps> = ({
         ) : (
           <>
             <p id="content">{content}</p>
-            <p id="amount">{formateAmout}</p>
+            <p id="amount-spend">{formateAmout}</p>
           </>
         )}
       </div>
