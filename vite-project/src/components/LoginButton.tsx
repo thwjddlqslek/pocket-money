@@ -135,6 +135,16 @@ const LoginButton = () => {
   };
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Logout error:", error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "로그아웃 중 오류가 발생했습니다!",
+        showConfirmButton: true,
+      });
+      return;
+    }
     Swal.fire({
       position: "center",
       icon: "success",

@@ -42,7 +42,7 @@ const Main: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase.auth.getUser();
-      console.log("fetchIncomeReports, fetchSpendReports 수행 완료");
+      console.log("fetchIncomeReports, fetchSpendReports 수행 완료", data);
       dispatch(fetchIncomeReports());
       dispatch(fetchSpendReports());
     };

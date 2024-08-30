@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import Main from "./components/Main";
 import store from "./store";
-import ThemeContextProvider, { ThemeContext } from "./context/ThemeContext";
+import ThemeContextProvider from "./context/ThemeContext";
 import GlobalStyle from "./styles/globalStyle";
 
 const App: React.FC = () => {

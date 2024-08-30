@@ -144,7 +144,7 @@ const incomeSlice = createSlice({
       (state, action: PayloadAction<Report[]>) => {
         // Report[] : Report 객체의 배열, 여러 개 Report 객체 포함
         // action.payload로 새로운 상태 설정
-        console.log("Fetched income reports:", action.payload);
+        console.log("Fetched income reports:", action.payload, state);
         return action.payload;
       }
     );
