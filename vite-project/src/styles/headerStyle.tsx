@@ -80,6 +80,9 @@ export const StyledHeader = styled.div`
   &: active {
     animation: ${bounce} 0.5s ease;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const ButtonStyle = styled.div`
@@ -95,6 +98,7 @@ export const ButtonStyle = styled.div`
   color: ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.body};
   border: 1px solid ${({ theme }) => theme.border};
+  z-index: 1000;
 `;
 
 export const LoginButtonStyle = styled(ButtonStyle)`
@@ -102,6 +106,7 @@ export const LoginButtonStyle = styled(ButtonStyle)`
   top: 0;
   right: 0;
   margin: 1rem 1rem 0 0;
+  z-index: 1000;
 `;
 
 export const JoinButtonStyle = styled(ButtonStyle)`
@@ -109,6 +114,7 @@ export const JoinButtonStyle = styled(ButtonStyle)`
   top: 0;
   left: 0;
   margin: 1rem 0 0 1rem;
+  z-index: 1000;
 `;
 
 export const LogoutButtonStyle = styled(ButtonStyle)`
@@ -117,6 +123,7 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
   left: 0;
   margin-top: 1rem;
   background: ${({ theme }) => theme.clicked};
+  z-index: 1000;
 
   //margin: 1rem 0 0 1rem;
 `;
@@ -134,6 +141,7 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
   margin: 4rem 0 0 1rem;
   padding: 2rem 2.5rem 2.5rem 2rem;
   color: ${({ theme }) => theme.border};
@@ -210,6 +218,30 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
     background-color: ${({ theme }) => theme.spend};
     color: ${({ theme }) => theme.body};
   }
+  @media (max-width: 768px) {
+    width: 14rem;
+    height: 14rem;
+    h1 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    input {
+      padding: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    .buttons {
+      gap: 1rem;
+    }
+
+    button {
+      height: 2rem;
+    }
+  }
 `;
 
 export const MyContainer = styled.div`
@@ -227,6 +259,7 @@ export const MyContainer = styled.div`
   margin: 1rem 0 0 1rem;
   color: ${({ theme }) => theme.border};
   box-shadow: 5px 8px 7px rgba(0, 0, 0, 0.15);
+  z-index: 999;
 
   h1 {
     font-size: 1.2rem;
@@ -246,6 +279,9 @@ export const MyContainer = styled.div`
     word-wrap: break-word;
     word-break: break-word;
     //background: pink;
+  }
+  @media (max-width: 768px) {
+    position: fixed;
   }
 `;
 
@@ -267,4 +303,5 @@ export const ThemeButton = styled.div`
   top: 0;
   right: 0;
   margin: 1rem 1rem 0 0;
+  z-index: 1000;
 `;

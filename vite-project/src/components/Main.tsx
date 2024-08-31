@@ -199,48 +199,50 @@ const Main: React.FC = () => {
       <m.MainContainer>
         <m.PocketContainer>
           <div>
-            <div className="date-title">
+            <div>
               <BigDateSelector
                 onYearChange={handleYearChange}
                 onMonthChange={handleMonthChange}
                 selectedMonth={selectedMonth}
               />
-              <p>의 수입과 지출 내역</p>
             </div>
-            <div className="button-container">
-              <m.AddButton
-                $bgColor={isDarkMode ? darkTheme.income : lightTheme.income}
-                onClick={() =>
-                  clickShowModal(
-                    isDarkMode ? darkTheme.income : lightTheme.income,
-                    "수입",
-                    false
-                  )
-                }
-              >
-                수입+
-              </m.AddButton>
-              <m.AddButton
-                $bgColor={isDarkMode ? darkTheme.spend : lightTheme.spend}
-                onClick={() =>
-                  clickShowModal(
-                    isDarkMode ? darkTheme.spend : lightTheme.spend,
-                    "지출",
-                    true
-                  )
-                }
-              >
-                지출+
-              </m.AddButton>
-              <RegistModal
-                show={showModal}
-                onClose={clickCloseModal}
-                isSpendBttClicked={isSpendBttClicked}
-                onAddIncome={handleAddIncome}
-                onAddSpend={handleAddSpend}
-                modalColor={modalColor}
-                modalTitle={modalTitle}
-              />
+            <div className="title-button">
+              <p>의 수입과 지출 내역</p>
+              <div className="button-container">
+                <m.AddButton
+                  $bgColor={isDarkMode ? darkTheme.income : lightTheme.income}
+                  onClick={() =>
+                    clickShowModal(
+                      isDarkMode ? darkTheme.income : lightTheme.income,
+                      "수입",
+                      false
+                    )
+                  }
+                >
+                  수입+
+                </m.AddButton>
+                <m.AddButton
+                  $bgColor={isDarkMode ? darkTheme.spend : lightTheme.spend}
+                  onClick={() =>
+                    clickShowModal(
+                      isDarkMode ? darkTheme.spend : lightTheme.spend,
+                      "지출",
+                      true
+                    )
+                  }
+                >
+                  지출+
+                </m.AddButton>
+                <RegistModal
+                  show={showModal}
+                  onClose={clickCloseModal}
+                  isSpendBttClicked={isSpendBttClicked}
+                  onAddIncome={handleAddIncome}
+                  onAddSpend={handleAddSpend}
+                  modalColor={modalColor}
+                  modalTitle={modalTitle}
+                />
+              </div>
             </div>
           </div>
           <m.TotalContainer>
@@ -295,7 +297,6 @@ const Main: React.FC = () => {
           spendData={spendData}
           selectedYear={selectedYear}
         />
-        <m.PocketContainer></m.PocketContainer>
       </m.MainContainer>
     </>
   );

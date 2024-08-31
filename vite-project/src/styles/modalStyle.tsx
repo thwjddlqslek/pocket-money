@@ -11,7 +11,7 @@ export const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(2px);
-  z-index: 999;
+  z-index: 1001;
 `;
 export const ModalContent = styled.div<{ $modalColor: string }>`
   position: relative;
@@ -25,7 +25,7 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1000;
+  z-index: 1500;
 
   & button {
     position: absolute;
@@ -88,6 +88,35 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
       margin: 0;
     }
   }
+  @media (max-width: 768px) {
+    width: 20rem;
+    height: 19rem;
+
+    & h1 {
+      font-size: 1.3rem;
+    }
+    & button {
+      font-size: 1rem;
+    }
+
+    & .form-grid {
+      gap: 1rem;
+    }
+    & .form-grid label {
+      width: 2rem;
+      font-size: 1rem;
+      margin: 0.6rem 0 0;
+    }
+    & .form-grid h2 {
+      width: 13rem;
+      font-size: 1rem;
+      margin: 0.8rem 0 0 0;
+    }
+    & .form-grid input {
+      height: 1.2rem;
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 export const SmallDateSelector = styled.div<{ $modalColor: string }>`
@@ -99,7 +128,7 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
     width: 24rem;
     margin: 0;
   }
-  
+
   select {
     border: 1px solid ${(props) => props.$modalColor};
     //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -114,9 +143,9 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
     height: 2.7rem;
     box-shadow: none;
     margin: 0 0 0 1rem;
-  background: ${({ theme }) => theme.body};
-  color: ${({ theme }) => theme.text};
-    
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
+
     &::-webkit-scrollbar {
       width: 7px;
       height: 7px;
@@ -125,13 +154,23 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
       border-radius: 2px;
       //background: rgba(224, 229, 253, 0.7);
       background: rgba(0, 0, 0, 0.3);
-
     }
     &::-webkit-scrollbar-thumb:active {
       border-radius: 2px;
       background: rgba(0, 0, 0, 0.1);
     }
   }
+  @media (max-width: 768px) {
+    width: 16rem;
+    margin: 0 0 0 2rem;
+
+    select {
+      width: 4rem;
+      padding: 0 0 0 0.3rem;
+      font-size: 0.8rem;
+      height: 2.3rem;
+      margin: 0 0 0 0.5rem;
+    }
   }
 `;
 
@@ -152,5 +191,10 @@ export const RegistButton = styled.div<{ $modalColor: string }>`
     //border-color: #301db0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transform: scale(0.98);
+  }
+  @media (max-width: 768px) {
+    width: 6rem;
+    height: 3rem;
+    font-size: 1rem;
   }
 `;

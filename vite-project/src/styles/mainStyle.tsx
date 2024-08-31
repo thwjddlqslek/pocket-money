@@ -37,24 +37,40 @@ export const PocketContainer = styled(CommonContainer)`
       //justify-content: center;
     }
   }
-  & .date-title {
-    display: flex;
-    flex-direction: row;
-    font-size: 1.1rem;
-  }
-
   & p {
     margin: 1.5rem 0 1.2rem 1rem;
+  }
+  & .title-button {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  & .date-title-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      margin-right: auto;
+      flex-direction: column;
+      font-size: 1.1rem;
+    }
   }
 
   & .button-container {
     display: flex;
-    //background-color: red;
     //margin-left: auto;
     justify-content: center;
     align-items: center;
+    position: relative;
+    right: 0;
+    z-index: 999;
+
     @media (max-width: 768px) {
       margin-right: auto;
+      padding-left: 1rem;
+      z-index: 999;
     }
   }
 `;
@@ -111,7 +127,6 @@ export const TotalContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    font-size: 1rem;
   }
 
   div {
@@ -123,9 +138,12 @@ export const TotalContainer = styled.div`
   }
   @media (max-width: 768px) {
     flex-direction: row;
+    font-size: 1rem;
+
     div {
       display: flex;
       width: 50%;
+      padding: 0.5rem 0 0 0;
     }
   }
 `;
