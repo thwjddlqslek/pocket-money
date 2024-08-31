@@ -199,12 +199,14 @@ const Main: React.FC = () => {
       <m.MainContainer>
         <m.PocketContainer>
           <div>
-            <BigDateSelector
-              onYearChange={handleYearChange}
-              onMonthChange={handleMonthChange}
-              selectedMonth={selectedMonth}
-            />
-            <p>의 수입과 지출 내역</p>
+            <div className="date-title">
+              <BigDateSelector
+                onYearChange={handleYearChange}
+                onMonthChange={handleMonthChange}
+                selectedMonth={selectedMonth}
+              />
+              <p>의 수입과 지출 내역</p>
+            </div>
             <div className="button-container">
               <m.AddButton
                 $bgColor={isDarkMode ? darkTheme.income : lightTheme.income}
@@ -242,21 +244,23 @@ const Main: React.FC = () => {
             </div>
           </div>
           <m.TotalContainer>
-            <div>
-              총 수입 :{" "}
-              <m.ColorText
-                color={isDarkMode ? darkTheme.income : lightTheme.income}
-              >
-                {totalIncome.toLocaleString()} 원
-              </m.ColorText>
-            </div>
-            <div>
-              총 지출 :{" "}
-              <m.ColorText
-                color={isDarkMode ? darkTheme.spend : lightTheme.spend}
-              >
-                {totalSpend.toLocaleString()} 원
-              </m.ColorText>
+            <div className="total-container">
+              <div>
+                총 수입 :{" "}
+                <m.ColorText
+                  color={isDarkMode ? darkTheme.income : lightTheme.income}
+                >
+                  {totalIncome.toLocaleString()} 원
+                </m.ColorText>
+              </div>
+              <div>
+                총 지출 :{" "}
+                <m.ColorText
+                  color={isDarkMode ? darkTheme.spend : lightTheme.spend}
+                >
+                  {totalSpend.toLocaleString()} 원
+                </m.ColorText>
+              </div>
             </div>
           </m.TotalContainer>
           <m.ReportContainer>

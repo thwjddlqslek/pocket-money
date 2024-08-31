@@ -10,10 +10,14 @@ export const CommonContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  //background: black;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
 `;
 
 export const MainContainer = styled.div`
-  //background: #f1f5f9;
   display: flex;
   //justify-content: center;
   align-items: center;
@@ -23,13 +27,20 @@ export const MainContainer = styled.div`
 `;
 
 export const PocketContainer = styled(CommonContainer)`
-  //margin-top: 6rem;
-
-  & > div {
+  > div {
     //background: pink;
     display: flex;
     flex-direction: row;
     width: 100%;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      //justify-content: center;
+    }
+  }
+  & .date-title {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.1rem;
   }
 
   & p {
@@ -39,9 +50,12 @@ export const PocketContainer = styled(CommonContainer)`
   & .button-container {
     display: flex;
     //background-color: red;
-    margin-left: auto;
+    //margin-left: auto;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+      margin-right: auto;
+    }
   }
 `;
 
@@ -89,19 +103,30 @@ export const ColorText = styled.div<{ color: string }>`
 `;
 
 export const TotalContainer = styled.div`
-  //background: pink;
   width: 100%;
   display: flex;
   justify-content: center;
 
-  & > div {
+  .total-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+  }
+
+  div {
     display: flex;
     width: 50%;
-    //background: skyblue;
-    //height: 1.5rem;
     padding: 0.5rem;
     align-items: center;
     justify-content: center;
+  }
+  @media (max-width: 768px) {
+    flex-direction: row;
+    div {
+      display: flex;
+      width: 50%;
+    }
   }
 `;
 export const ReportContainer = styled.div`
@@ -135,6 +160,9 @@ export const ReportContainer = styled.div`
     &::-webkit-scrollbar-thumb:active {
       border-radius: 2px;
       background: ${({ theme }) => theme.scrollActive};
+    }
+    @media (max-width: 768px) {
+      width: 95%;
     }
   }
 `;
