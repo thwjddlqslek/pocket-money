@@ -46,6 +46,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           labels: {
             color: theme.text,
             font: {
+              family: "Moneygraphy-Pixel",
               size: 16,
             },
           },
@@ -54,7 +55,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           display: true,
           text: `${selectedYear}년 한 눈에 알아보기`,
           font: {
-            family: "Noto Sans KR",
+            family: "Moneygraphy-Pixel",
             size: 24,
             weight: 400,
           },
@@ -72,6 +73,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           ticks: {
             color: theme.text,
             font: {
+              family: "Moneygraphy-Pixel",
               size: 15,
             },
           },
@@ -84,6 +86,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({
           ticks: {
             color: theme.text,
             font: {
+              family: "Moneygraphy-Pixel",
               size: 15,
             },
           },

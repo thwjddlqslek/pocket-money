@@ -5,7 +5,7 @@ export const lightTheme = {
   bgcolor: "rgba(224, 229, 253, 0.7)",
   headerbr: "none",
   clicked:
-    "radial-gradient(circle, rgba(224, 229, 253, 0.7), rgba(67, 30, 245, 0.5))",
+    "radial-gradient(circle, rgba(224, 229, 253, 0.9), rgba(67, 30, 245, 0.3))",
   shadow: "rgba(0, 0, 0, 0.1)",
   income: "#431ef5",
   spend: "#EB0130",
@@ -21,7 +21,8 @@ export const darkTheme = {
   text: "#FFFFFF",
   bgcolor: "#000000",
   headerbr: "#FFFFFF",
-  clicked: "radial-gradient(circle, #606060, #000000)",
+  clicked:
+    "radial-gradient(circle, rgba(128, 128, 128, 0.7), rgba(0, 0, 0, 0.9))",
   shadow: "rgba(255, 255, 255, 0.2)",
   income: "#64DAFF",
   spend: "#FF98D8",

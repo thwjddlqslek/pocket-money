@@ -1,4 +1,33 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
+
+const wave = keyframes`
+  0%, 100% {
+    transform: translateY(0) scale(0.7);
+  }
+  50% {
+    transform: translateY(-15px) scale(1);
+  }
+`;
 
 export const CommonContainer = styled.div`
   width: 70vw;
@@ -106,7 +135,7 @@ export const AddButton = styled.button<{ $bgColor: string }>`
   color: white;
   cursor: pointer;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Moneygraphy-Pixel";
   font-size: 0.9rem;
   &:active {
     border-color: #301db0;
@@ -345,5 +374,92 @@ export const StyledScrollBar = styled.div`
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
     background: #ccc;
+  }
+`;
+
+export const StyledNotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: #808080;
+`;
+
+export const StyledHome = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  font-size: 5rem;
+  light-height: 3;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  h1 {
+    color: ${({ theme }) => theme.text};
+    font-size: 6rem;
+    margin-bottom: 1rem;
+    animation: ${slideUp} 1s ease-out;
+
+    &:hover {
+      color: ${({ theme }) => theme.border};
+    }
+  }
+
+  h2 {
+    animation: ${slideUp} 1s ease-out;
+    &:nth-child(2) {
+      animation: none;
+      span {
+        display: inline-block;
+        animation: ${wave} 2s ease-in-out infinite;
+        transform-origin: center;
+
+        &:nth-child(1) {
+          animation-delay: 0s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+        &:nth-child(3) {
+          animation-delay: 1s;
+        }
+        &:nth-child(4) {
+          animation-delay: 1.5s;
+        }
+        &:nth-child(5) {
+          animation-delay: 2s;
+        }
+        &:nth-child(6) {
+          animation-delay: 2.5s;
+        }
+        &:nth-child(7) {
+          animation-delay: 3s;
+        }
+
+        &:hover {
+          animation-play-state: paused;
+        }
+      }
+    }
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: ${slideUp} 1s ease-out 0.3s backwards;
+  margin-top: 2rem;
+  & > div {
+    animation: ${float} 3s ease-in-out infinite;
   }
 `;

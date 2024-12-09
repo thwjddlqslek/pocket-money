@@ -9,6 +9,15 @@ const bounce = keyframes`
 }
 `;
 
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
+
 const slideUp = keyframes`
   from {
     transform: translateY(20%);
@@ -32,25 +41,22 @@ const slideDown = keyframes`
 `;
 export const StyledHeader = styled.div`
   background: ${({ theme }) => theme.bgcolor};
-  //border: 1px solid ${({ theme }) => theme.headerbr};
   display: flex;
   justify-content: center;
   align-items: center;
   position: static;
   z-index: 100; /* Blur 영향 받음 */
-  top: 0;
-  //transform: translateX(-50%);
+  top: 10;
   width: 75vw;
   height: 5rem;
   min-height: 20px;
   box-shadow: 0 4px 6px ${({ theme }) => theme.shadow};
   overflow: hidden;
-  //border : 2px solid #000;
   border-radius: 2rem;
   color: ${({ theme }) => theme.border};
   cursor: pointer;
   transition: background-color 0.1s ease, color 0.1s ease, background 0.1s ease;
-
+  animation: ${float} 2.5s ease-in-out infinite;
   h1 {
     font-size: 1.3rem;
     position: relative;
@@ -99,6 +105,17 @@ export const ButtonStyle = styled.div`
   background: ${({ theme }) => theme.body};
   border: 1px solid ${({ theme }) => theme.border};
   z-index: 1000;
+
+  &.explore {
+    width: 15rem;
+    height: 7rem;
+    font-size: 3rem;
+    position: relative;
+    margin: 2rem auto;
+  }
+  &:hover {
+    background: ${({ theme }) => theme.clicked};
+  }
 `;
 
 export const LoginButtonStyle = styled(ButtonStyle)`
@@ -129,8 +146,8 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
 `;
 
 export const LoginModal = styled.div<{ $isVisible: boolean }>`
-  width: 22rem;
-  height: 15rem;
+  width: 27rem;
+  height: 20rem;
   background: ${({ theme }) => theme.body};
   border: 1px solid ${({ theme }) => theme.border};
   border-radius: 1rem;
@@ -183,6 +200,10 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
     border-radius: 1rem;
     padding: 0.6rem;
     font-size: 1rem;
+    font-family: "Moneygraphy-Pixel";
+    &::placeholder {
+      color: rgba(200, 200, 200, 0.6);
+    }
   }
 
   .buttons {
@@ -202,10 +223,11 @@ export const LoginModal = styled.div<{ $isVisible: boolean }>`
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     outline: none;
+    font-family: "Moneygraphy-Pixel";
   }
 
   #close {
-    background-color: rgba(160, 160, 160, 0.7);
+    background-color: rgba(200, 200, 200, 0.6);
     color: ${({ theme }) => theme.body};
   }
 
