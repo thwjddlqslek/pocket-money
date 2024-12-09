@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as m from "../styles/mainStyle";
-import RegistModal from "./RegistModal";
-import { BigDateSelector } from "./BigDateSelector";
+import RegistModal from "../components/RegistModal";
+import { BigDateSelector } from "../components/BigDateSelector";
 import IncomeReport from "../components/IncomeReport";
 import SpendReport from "../components/SpendReport";
-import Header from "./Header";
+import Header from "../components/Header";
 import { RootState, AppDispatch } from "../store";
 import {
   fetchIncomeReports,
@@ -18,9 +18,9 @@ import {
   addSpendReport,
   deleteSpendReport,
 } from "../store/spendSlice";
-import ChartComponent from "./ChartComponent";
+import ChartComponent from "../components/ChartComponent";
 import LoginButton from "../components/LoginButton";
-import ThemeButton from "./ThemeButton";
+import ThemeButton from "../components/ThemeButton";
 import { ThemeContext } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../styles/theme";
 

@@ -6,7 +6,8 @@ import * as h from "../styles/headerStyle";
 import supabase from "../supabaseClient";
 import { fetchIncomeReports } from "../store/incomeSlice";
 import { fetchSpendReports } from "../store/spendSlice";
-const LoginButton = () => {
+
+const LoginButton = ({ className }: { className?: string }) => {
   const [isJoinBttClicked, setIsJoinBttClicked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -159,14 +160,14 @@ const LoginButton = () => {
   };
 
   return (
-    <>
+    <div className={className}>
       {!showEmail ? (
         <>
-          <h.JoinButtonStyle onClick={handleJoin}>
+          <h.JoinButtonStyle onClick={handleJoin} className={className}>
             <div>Login</div>
           </h.JoinButtonStyle>
           {isJoinBttClicked && (
-            <h.LoginModal $isVisible={isJoinBttClicked}>
+            <h.LoginModal $isVisible={isJoinBttClicked} className={className}>
               <h1>가입해서 따로 관리해보자!</h1>
               <div className="inputs">
                 <p>EMAIL</p>
@@ -216,7 +217,7 @@ const LoginButton = () => {
           </h.MyContainer>
         </>
       )}
-    </>
+    </div>
   );
 };
 
