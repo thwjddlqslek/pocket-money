@@ -148,6 +148,8 @@ export const LogoutButtonStyle = styled(ButtonStyle)`
 export const LoginModal = styled.div<{ $isVisible: boolean }>`
   width: 27rem;
   height: 20rem;
+  min-height: 17rem;
+  min-width: 19rem;
   background: ${({ theme }) => theme.body};
   border: 1px solid ${({ theme }) => theme.border};
   border-radius: 1rem;

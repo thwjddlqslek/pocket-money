@@ -42,7 +42,8 @@ export const CommonContainer = styled.div`
   //background: black;
 
   @media (max-width: 768px) {
-    width: 90vw;
+    max-width: 90vw;
+    min-width: 350px;
   }
 `;
 
@@ -53,6 +54,9 @@ export const MainContainer = styled.div`
   flex-direction: column;
   width: 100%;
   background: ${({ theme }) => theme.body};
+  @media (max-width: 768px) {
+    min-width: 350px;
+  }
 `;
 
 export const PocketContainer = styled(CommonContainer)`
@@ -117,7 +121,7 @@ export const BigDateSelector = styled.div`
     //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-family: "Moneygraphy-Pixel", sans-serif;
     padding: 0.5rem;
     margin: 1rem 0 1rem 1rem;
     border-radius: 1rem;

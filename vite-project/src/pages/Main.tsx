@@ -248,7 +248,7 @@ const Main: React.FC = () => {
           <m.TotalContainer>
             <div className="total-container">
               <div>
-                총 수입 :{" "}
+                총 수입{" "}
                 <m.ColorText
                   color={isDarkMode ? darkTheme.income : lightTheme.income}
                 >
@@ -256,7 +256,7 @@ const Main: React.FC = () => {
                 </m.ColorText>
               </div>
               <div>
-                총 지출 :{" "}
+                총 지출{" "}
                 <m.ColorText
                   color={isDarkMode ? darkTheme.spend : lightTheme.spend}
                 >

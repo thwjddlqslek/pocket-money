@@ -16,7 +16,7 @@ export const ModalContainer = styled.div`
 export const ModalContent = styled.div<{ $modalColor: string }>`
   position: relative;
   width: 30rem;
-  height: 25rem;
+  height: 24.5rem;
   border: 1px solid ${(props) => props.$modalColor};
   border-radius: 1rem;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
@@ -31,13 +31,14 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 1.1rem;
-    margin-top: 5px;
-    margin-right: 5px;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-right: 10px;
     cursor: pointer;
     border-radius: 1rem;
     border: none;
     background-color: white;
+    font-family: "Moneygraphy-Pixel", sans-serif;
     color: ${(props) => props.$modalColor};
     background: ${({ theme }) => theme.body};
   }
@@ -73,14 +74,15 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
   }
   & .form-grid input {
     width: 100%;
-    height: 1.8rem;
-    padding: 0.5rem;
+    height: 2.7rem;
+    padding: 1rem;
     border: 1px solid ${(props) => props.$modalColor};
     border-radius: 1rem;
     font-size: 1rem;
     outline: none;
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+    font-family: "Moneygraphy-Pixel", sans-serif;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -133,7 +135,7 @@ export const SmallDateSelector = styled.div<{ $modalColor: string }>`
     border: 1px solid ${(props) => props.$modalColor};
     //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    font-weight: 600;
+    font-family: "Moneygraphy-Pixel", sans-serif;
     padding: 0.5rem;
     margin: 1rem 0 1rem 1rem;
     border-radius: 1rem;
