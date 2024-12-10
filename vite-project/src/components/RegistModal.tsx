@@ -110,7 +110,7 @@ const RegistModal: React.FC<ModalProps> = ({
     <m.ModalContainer>
       <m.ModalContent $modalColor={modalColor}>
         <div>
-          <button onClick={handleCloseModal}>X</button>
+          <button onClick={handleCloseModal}>✕</button>
           <h1>{modalTitle} 내역 작성하기</h1>
           <div className="form-grid">
             <label>날짜</label>

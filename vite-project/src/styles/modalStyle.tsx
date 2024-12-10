@@ -1,4 +1,15 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -19,7 +30,7 @@ export const ModalContent = styled.div<{ $modalColor: string }>`
   height: 24.5rem;
   border: 1px solid ${(props) => props.$modalColor};
   border-radius: 1rem;
-  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 12px ${({ theme }) => theme.shadow};
   color: ${(props) => props.$modalColor};
   background: ${({ theme }) => theme.body};
   display: flex;
@@ -199,4 +210,59 @@ export const RegistButton = styled.div<{ $modalColor: string }>`
     height: 3rem;
     font-size: 1rem;
   }
+`;
+
+export const WelModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+export const WelModalContent = styled.div`
+  background: ${({ theme }) => theme.body};
+  border-radius: 1rem;
+  padding: 2rem;
+  min-width: 400px;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: ${slideUp} 1s ease-out;
+`;
+
+export const WelModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.text};
+`;
+
+export const WelModalBody = styled.div`
+  margin: 1.5rem 0;
+  text-align: center;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.text};
+  font-size: 1.2rem;
+`;
+
+export const WelModalFooter = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+`;
+
+export const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: ${({ theme }) => theme.text};
+  font-weight: bold;
 `;

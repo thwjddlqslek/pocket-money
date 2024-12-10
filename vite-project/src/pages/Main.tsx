@@ -23,6 +23,7 @@ import LoginButton from "../components/LoginButton";
 import ThemeButton from "../components/ThemeButton";
 import { ThemeContext } from "../context/ThemeContext";
 import { darkTheme, lightTheme } from "../styles/theme";
+import WelcomeModal from "../components/WelcomeModal";
 
 interface Report {
   id?: number;
@@ -33,6 +34,7 @@ interface Report {
 
 const Main: React.FC = () => {
   // useSelector : Redux 스토어의 상태를 읽는 Hook
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
   const incomeReports = useSelector((state: RootState) => state.income);
   const spendReports = useSelector((state: RootState) => state.spend);
   const dispatch: AppDispatch = useDispatch();
@@ -51,6 +53,10 @@ const Main: React.FC = () => {
       fetchData();
     }
   }, [dispatch]);
+
+  const handleCloseWelcomeModal = () => {
+    setShowWelcomeModal(false);
+  };
 
   const [selectedYear, setSelectedYear] = useState<number>(
     new Date().getFullYear()
@@ -196,6 +202,7 @@ const Main: React.FC = () => {
       <Header totalIncome={totalIncome} totalSpend={totalSpend} />
       <LoginButton />
       <ThemeButton />
+      <WelcomeModal show={showWelcomeModal} onClose={handleCloseWelcomeModal} />
       <m.MainContainer>
         <m.PocketContainer>
           <div>
