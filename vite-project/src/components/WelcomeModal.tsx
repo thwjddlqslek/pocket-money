@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as m from "../styles/modalStyle";
 
 interface WelcomeModalProps {
@@ -7,6 +7,12 @@ interface WelcomeModalProps {
 }
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ show, onClose }) => {
+  useEffect(() => {
+    if (show) {
+      sessionStorage.setItem("welcomeModalShown", "true");
+    }
+  }, [show]);
+
   if (!show) return null;
 
   return (

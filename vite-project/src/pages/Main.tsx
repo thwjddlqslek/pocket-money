@@ -33,8 +33,9 @@ interface Report {
 }
 
 const Main: React.FC = () => {
-  // useSelector : Redux 스토어의 상태를 읽는 Hook
-  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(
+    !sessionStorage.getItem("welcomeModalShown")
+  );
   const incomeReports = useSelector((state: RootState) => state.income);
   const spendReports = useSelector((state: RootState) => state.spend);
   const dispatch: AppDispatch = useDispatch();
