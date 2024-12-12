@@ -132,6 +132,10 @@ export const JoinButtonStyle = styled(ButtonStyle)`
   left: 0;
   margin: 1rem 0 0 1rem;
   z-index: 1000;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 45px;
+  }
 `;
 
 export const LogoutButtonStyle = styled(ButtonStyle)`
@@ -328,4 +332,8 @@ export const ThemeButton = styled.div`
   right: 0;
   margin: 1rem 1rem 0 0;
   z-index: 1000;
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 45px;
+  }
 `;

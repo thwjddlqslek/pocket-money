@@ -67,11 +67,13 @@ export const PocketContainer = styled(CommonContainer)`
     width: 100%;
     @media (max-width: 768px) {
       flex-direction: column;
-      //justify-content: center;
     }
   }
   & p {
     margin: 1.5rem 0 1.2rem 1rem;
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
   & .title-button {
     display: flex;
@@ -147,7 +149,7 @@ export const AddButton = styled.button<{ $bgColor: string }>`
     transform: scale(0.98);
   }
 `;
-export const ColorText = styled.div<{ color: string }>`
+export const ColorText = styled.p<{ color: string }>`
   color: ${(props) => props.color};
 `;
 
@@ -165,18 +167,19 @@ export const TotalContainer = styled.div`
   div {
     display: flex;
     width: 50%;
-    padding: 0.5rem;
     align-items: center;
     justify-content: center;
   }
   @media (max-width: 768px) {
     flex-direction: row;
-    font-size: 1rem;
+    font-size: 1.1rem;
 
     div {
       display: flex;
       width: 50%;
-      padding: 0.5rem 0 0 0;
+    }
+    p {
+      font-size: 1rem;
     }
   }
 `;
@@ -192,7 +195,8 @@ export const ReportContainer = styled.div`
     display: flex;
     width: 47%;
     min-height: 35px;
-    border: 1px solid ${({ theme }) => theme.border};
+    z-index: 999;
+    //border: 1px solid ${({ theme }) => theme.border};
     border-radius: 1rem;
     align-items: center;
     //justify-content: flex-start;
@@ -257,7 +261,6 @@ export const OneReport = styled.h1`
   //position: relative;
   flex-direction: column;
   justify-content: center;
-  //background-color: pink;
 
   .icon-box-container {
     display: flex;
@@ -322,16 +325,24 @@ export const OneReport = styled.h1`
   }
 
   #date {
-    width: 22%;
+    width: 25%;
     text-align: left;
     padding-bottom: 0.7rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
 
   #content {
-    width: 53%;
+    width: 50%;
     word-wrap: break-word;
     text-align: center;
     padding-bottom: 0.7rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
   #amount-income {
     color: ${({ theme }) => theme.income};
@@ -340,6 +351,10 @@ export const OneReport = styled.h1`
     word-wrap: break-word;
     margin-right: 1rem;
     padding-bottom: 0.7rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
   #amount-spend {
     color: ${({ theme }) => theme.spend};
@@ -348,6 +363,10 @@ export const OneReport = styled.h1`
     word-wrap: break-word;
     margin-right: 1rem;
     padding-bottom: 0.7rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
 
   #update {

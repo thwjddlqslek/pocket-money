@@ -164,7 +164,7 @@ const LoginButton = ({ className }: { className?: string }) => {
       {!showEmail ? (
         <>
           <h.JoinButtonStyle onClick={handleJoin} className={className}>
-            <div>Login</div>
+            <p>Login</p>
           </h.JoinButtonStyle>
           {isJoinBttClicked && (
             <h.LoginModal $isVisible={isJoinBttClicked} className={className}>
