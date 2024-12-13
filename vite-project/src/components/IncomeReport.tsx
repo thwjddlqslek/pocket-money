@@ -70,7 +70,7 @@ const IncomeReport: React.FC<IncomeReportProps> = ({
         </div>
         {isDelClicked ? (
           <>
-            <m.BubbleTail></m.BubbleTail>
+            <m.BubbleTail />
             <m.BubbleIcon>
               정말로 삭제하시겠습니까?
               <button onClick={onDelete}>ok</button>
