@@ -195,7 +195,7 @@ export const ReportContainer = styled.div`
     display: flex;
     width: 47%;
     min-height: 35px;
-    z-index: 999;
+    //z-index: 999;
     //border: 1px solid ${({ theme }) => theme.border};
     border-radius: 1rem;
     align-items: center;
@@ -261,6 +261,7 @@ export const OneReport = styled.h1`
   //position: relative;
   flex-direction: column;
   justify-content: center;
+  z-index: 99;
 
   .icon-box-container {
     display: flex;
